@@ -53,3 +53,4 @@
 (package! mixed-pitch)
 (package! org-roam-bibtex)
 (package! crux)
+(package! beacon)
