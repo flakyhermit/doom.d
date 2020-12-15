@@ -35,7 +35,6 @@
 
 ;; Global keybindings
 (map! "C-x k" #'kill-this-buffer)
-(map! "<f10>" #'kill-this-buffer)
 (map! "<f9>" #'+term/toggle)
 
 ;; Important hooks
