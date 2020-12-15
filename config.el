@@ -30,8 +30,8 @@
 ;; My configurations
 ;; (add-load-path! "../.emacs.d/")
 ;; Set default frame dimensions
-(add-to-list 'default-frame-alist '(height . 34))
-(add-to-list 'default-frame-alist '(width . 115))
+(add-to-list 'default-frame-alist '(height . 36))
+(add-to-list 'default-frame-alist '(width . 120))
 
 ;; Global keybindings
 (map! "C-x k" #'kill-this-buffer)
@@ -56,6 +56,7 @@
         org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "REFL(r)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
         org-inbox-file "~/Dropbox/Notes/org/inbox.org"
         org-agenda-files '("~/Dropbox/Notes/org")
+        org-agenda-span 'week
         org-refile-targets org-global-refile-targets
         org-archive-location (concat org-directory "/archive/%s_archive::")
         org-startup-with-inline-images t
@@ -96,6 +97,7 @@
 (map! :leader "A" #'org-agenda)
 (map! :map mode-specific-map "a" #'org-agenda)
 (map! :map mode-specific-map "c" #'counsel-org-capture)
+(add-to-list 'org-modules 'org-habit)
 (defun org-refile-global ()
   "Refile to the global refile target list"
   (interactive)
