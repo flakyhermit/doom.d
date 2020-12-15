@@ -95,6 +95,15 @@
 (add-hook! org-capture #'yas-expand)
 (add-hook! org-capture (lambda () (insert "Cuck yeah")))
 
+;; deft ---------------------
+(setq deft-directory org-directory
+      deft-recursive t
+      deft-auto-save-interval -1.0
+      deft-extensions '("org")
+      deft-default-extension "org")
+(define-key global-map (kbd "<f8>") 'deft)
+(define-key mode-specific-map (kbd "f") 'deft-find-file)
+(map! :leader "f o" #'deft-find-file)
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
