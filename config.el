@@ -19,28 +19,38 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
- (setq doom-font (font-spec :family "JetBrains Mono" :size 19 :weight 'regular)
-       doom-variable-pitch-font (font-spec :family "Iosevka Etoile" :size 13))
+ (setq doom-font (font-spec :family "Input Mono Narrow" :size 19 :weight 'regular)
+       doom-variable-pitch-font (font-spec :family "Input Mono Narrow" :size 22))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-sourcerer)
 
 ;; My configurations
 ;; (add-load-path! "../.emacs.d/")
 ;; Set default frame dimensions
-(add-to-list 'default-frame-alist '(height . 32))
-(add-to-list 'default-frame-alist '(width . 110))
+(add-to-list 'default-frame-alist '(height . 34))
+(add-to-list 'default-frame-alist '(width . 115))
 
 ;; Global keybindings
 (map! "C-x k" #'kill-this-buffer)
+(map! "<f10>" #'kill-this-buffer)
+(map! "<f9>" #'+term/toggle)
+
+;; Important hooks
+
+;; Custom loads
+(load! "me.el")
+
+(display-battery-mode 1)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/Notes/org")
+(setq org-ellipsis " ▼ ")
 (setq org-global-refile-targets '(("~/Dropbox/Notes/org/emacs.org" :maxlevel . 1)
-			          ("~/Dropbox/Notes/org/gtd.org" :maxlevel . 2)))
+                                  ("~/Dropbox/Notes/org/gtd.org" :maxlevel . 2)))
 (after! org
   (setq org-return-follows-link t
         org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "REFL(r)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
@@ -50,39 +60,38 @@
         org-archive-location (concat org-directory "/archive/%s_archive::")
         org-startup-with-inline-images t
         org-indent-indentation-per-level 1
-        ;; org-adapt-indentation nil
         org-hide-emphasis-markers t
         org-capture-templates
         `(("t" "Add a random capture to GTD" entry
-	   (file+olp ,(concat org-directory "/gtd.org") "Inbox")
-	   "* %?\n")
-	  ("T" "Just a THOUGHT" entry
-	   (file ,(concat org-directory "/inbox.org"))
-	   "* %?\n")
-	  ("Q" "A QUOTE" entry
-	   (file ,(concat org-directory "/quotes.org"))
-	   "* %?\n\n")
-	  ("b" "Add a BLOG post IDEA" entry
-	   (file ,(concat org-directory "/blog-post-ideas.org"))
-	   "* %?\n")
-	  ("p" "A project IDEA" entry
-	   (file ,(concat org-directory "/projects.org"))
-	   "* %?\n")
-	  ("B" "Add a BOOK to the 'considering' list" entry
-	   (file+olp ,(concat org-directory "/lists/books.org") "Considering")
-	   "* <book%?\n")
-	  ("k" "Add a BOOK to read with Krys" entry
-	   (file+olp ,(concat org-directory "/lists/books.org") "Shelved" "Fiction")
-	   "* <book%? :krys:\n")
-	  ("r" "Add an ARTICLE to read later" checkitem
-	   (file+olp+datetree ,(concat org-directory "/lists/read-later.org"))
-	   "- [ ] %:annotation %?\n")
-	  ("v" "Add a word to the vocabulary list" plain
-	   (file+headline ,(concat org-directory "/vocabulary.org") ,(format-time-string "%F"))
-	   "<voc%?\n")
-	  ("e" "An Emacs customization idea" entry
-	   (file+headline ,(concat org-directory "/emacs.org") "To-do")
-	"* TODO %? \n\n"))))
+           (file+olp ,(concat org-directory "/gtd.org") "Inbox")
+           "* %?\n")
+          ("T" "Just a THOUGHT" entry
+           (file ,(concat org-directory "/inbox.org"))
+           "* %?\n")
+          ("Q" "A QUOTE" entry
+           (file ,(concat org-directory "/quotes.org"))
+           "* %?\n\n")
+          ("b" "Add a BLOG post IDEA" entry
+           (file ,(concat org-directory "/blog-post-ideas.org"))
+           "* %?\n")
+          ("p" "A project IDEA" entry
+           (file ,(concat org-directory "/projects.org"))
+           "* %?\n")
+          ("B" "Add a BOOK to the 'considering' list" entry
+           (file+olp ,(concat org-directory "/lists/books.org") "Considering")
+           "* <book%?\n")
+          ("k" "Add a BOOK to read with Krys" entry
+           (file+olp ,(concat org-directory "/lists/books.org") "Shelved" "Fiction")
+           "* <book%? :krys:\n")
+          ("r" "Add an ARTICLE to read later" checkitem
+           (file+olp+datetree ,(concat org-directory "/lists/read-later.org"))
+           "- [ ] %:annotation %?\n")
+          ("v" "Add a word to the vocabulary list" plain
+           (file+headline ,(concat org-directory "/vocabulary.org") ,(format-time-string "%F"))
+           "<voc%?\n")
+          ("e" "An Emacs customization idea" entry
+           (file+headline ,(concat org-directory "/emacs.org") "To-do")
+           "* TODO %? \n\n"))))
 (map! :leader "X" #'counsel-org-capture)
 (map! :leader "A" #'org-agenda)
 (map! :map mode-specific-map "a" #'org-agenda)
@@ -93,8 +102,46 @@
   (let ((org-refile-targets org-global-refile-targets))
     (org-refile)))
 (map! "C-c 0 C-w" #'org-refile-global)
-(add-hook! org-capture #'yas-expand)
-(add-hook! org-capture (lambda () (insert "Cuck yeah")))
+(add-hook! org-capture-mode #'yas-expand)
+
+;; org-roam ------
+(setq org-roam-directory (concat org-directory "/knowledgebase")
+      org-roam-capture-templates `(("d" "default"
+                                    plain #'org-roam-capture--get-point
+                                   "\n- References :: \n- Tags :: %?\n\n"
+                                   :file-name "%<%Y%m%d%H%M%S>-${slug}"
+                                   :head "#+title: ${title}\n#+created: %U\n"
+                                   :unnarrowed t)))
+(add-hook! org-roam-mode #'org-roam-bibtex-mode)
+(add-hook 'org-mode-hook #'prose-mode)
+
+;; markdown-mode ------------------
+;; (add-hook 'markdown-mode-hook 'wc-mode)
+(add-hook 'markdown-mode-hook #'prose-mode)
+
+(define-minor-mode prose-mode
+  "For editing prose"
+  :lighter " prose"
+  (if (eq prose-mode t)
+      (progn
+        (display-line-numbers-mode -1)
+        (mixed-pitch-mode 1)
+        (setq line-spacing 2)
+        (kill-local-variable 'left-margin-width)
+        (setq left-margin-width 2))
+    (progn
+      (mixed-pitch-mode -1)
+      (display-line-numbers-mode 1))))
+
+;; orb ------
+(setq orb-templates
+  '(("r" "ref" plain (function org-roam-capture--get-point) ""
+     :file-name "references/${citekey}"
+     :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_tags: ref\n#+created: %U\n" ; <--
+     :unnarrowed t)))
+(define-key mode-specific-map (kbd "n a") 'orb-note-actions)
+(define-key mode-specific-map (kbd "n f") 'orb-find-non-ref-file)
+(map! :leader "n r F" #'orb-find-non-ref-file)
 
 ;; deft ---------------------
 (setq deft-directory org-directory
@@ -112,9 +159,14 @@
 ;; olivetti -----------------
 (setq olivetti-body-width 120)
 (map! :map ctl-x-map "t o" #'olivetti-mode)
+(add-hook! olivetti-mode ())
 
 (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+(require 'warnings)
+(add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 
+;; Custom faces
+;; (custom-theme-set-faces 'doom-Iosvkem ())
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
