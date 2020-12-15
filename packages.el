@@ -48,3 +48,8 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+(package! olivetti)
+(package! mixed-pitch)
+(package! org-roam-bibtex)
+(package! crux)
