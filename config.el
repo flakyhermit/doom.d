@@ -20,7 +20,7 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
  (setq doom-font (font-spec :family "JetBrains Mono" :size 19 :weight 'regular)
-       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+       doom-variable-pitch-font (font-spec :family "Iosevka Etoile" :size 13))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -38,11 +38,72 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Dropbox/Notes/org")
+(setq org-global-refile-targets '(("~/Dropbox/Notes/org/emacs.org" :maxlevel . 1)
+			          ("~/Dropbox/Notes/org/gtd.org" :maxlevel . 2)))
+(setq org-return-follows-link t
+      org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "REFL(r)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
+      org-inbox-file "~/Dropbox/Notes/org/inbox.org"
+      org-agenda-files '("~/Dropbox/Notes/org")
+      org-refile-targets org-global-refile-targets
+      org-archive-location (concat org-directory "/archive/%s_archive::")
+      org-startup-with-inline-images t
+      org-indent-indentation-per-level 1
+    ;; org-adapt-indentation nil
+      org-hide-emphasis-markers t
+      org-capture-templates
+      `(("t" "Add a random capture to GTD" entry
+	(file+olp ,(concat org-directory "/gtd.org") "Inbox")
+	"* %?\n")
+	("T" "Just a THOUGHT" entry
+	(file ,(concat org-directory "/inbox.org"))
+	"* %?\n")
+	("Q" "A QUOTE" entry
+	(file ,(concat org-directory "/quotes.org"))
+	"* %?\n\n")
+	("b" "Add a BLOG post IDEA" entry
+	(file ,(concat org-directory "/blog-post-ideas.org"))
+	"* %?\n")
+	("p" "A project IDEA" entry
+	(file ,(concat org-directory "/projects.org"))
+	"* %?\n")
+	("B" "Add a BOOK to the 'considering' list" entry
+	(file+olp ,(concat org-directory "/lists/books.org") "Considering")
+	"* <book%?\n")
+	("k" "Add a BOOK to read with Krys" entry
+	(file+olp ,(concat org-directory "/lists/books.org") "Shelved" "Fiction")
+	"* <book%? :krys:\n")
+	("r" "Add an ARTICLE to read later" checkitem
+	(file+olp+datetree ,(concat org-directory "/lists/read-later.org"))
+	"- [ ] %:annotation %?\n")
+	("v" "Add a word to the vocabulary list" plain
+	(file+headline ,(concat org-directory "/vocabulary.org") ,(format-time-string "%F"))
+	"<voc%?\n")
+	("e" "An Emacs customization idea" entry
+	(file+headline ,(concat org-directory "/emacs.org") "To-do")
+	"* TODO %? \n\n")))
+(map! :leader "X" #'counsel-org-capture)
+(map! :leader "A" #'org-agenda)
+(map! :map mode-specific-map "a" #'org-agenda)
+(map! :map mode-specific-map "c" #'counsel-org-capture)
+(defun org-refile-global ()
+  "Refile to the global refile target list"
+  (interactive)
+  (let ((org-refile-targets org-global-refile-targets))
+    (org-refile)))
+(map! "C-c 0 C-w" #'org-refile-global)
+(add-hook! org-capture #'yas-expand)
+(add-hook! org-capture (lambda () (insert "Cuck yeah")))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
+
+;; olivetti -----------------
+(setq olivetti-body-width 120)
+(map! :map ctl-x-map "t o" olivetti-mode)
+
+(add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
