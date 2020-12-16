@@ -61,7 +61,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/Notes/org")
-;; (setq org-ellipsis " ▼ ")
+(setq org-ellipsis " ▼ ")
 (setq org-global-refile-targets '(("~/Dropbox/Notes/org/emacs.org" :maxlevel . 1)
                                   ("~/Dropbox/Notes/org/gtd.org" :maxlevel . 2)))
 (after! org
