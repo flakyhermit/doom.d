@@ -52,6 +52,11 @@
 (beacon-mode 1)
 
 ;; Major mode configurations
+;; evil ---------------------
+;; Move the cursor to the new window when splitting
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
+
 ;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
