@@ -91,7 +91,7 @@
            "- [ ] %:annotation %?\n")
           ("e" "Emacs")
           ("ed" "A DOOM EMACS tip or customizaiton idea" entry
-           (file+datetree ,(concat org-directory "/doom.org"))
+           (file+olp+datetree ,(concat org-directory "/doom.org"))
            "* %?\n")
           ("ee" "An Emacs customization idea" entry
            (file+headline ,(concat org-directory "/emacs.org") "To-do")
