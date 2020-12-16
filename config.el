@@ -27,7 +27,7 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-sourcerer)
 
-;; My configurations
+;; Global settings
 ;; Scratch buffer message
 (setq initial-scratch-message (concat ";; \n;; Emacs loaded in " (emacs-init-time) "\n;; -----------------------------------\n;; Howdy Jewel! Welcome to Emacs.\n;; Today is " (format-time-string "%d %B, %A")  "\n"))
 ;; (add-load-path! "../.emacs.d/")
@@ -44,9 +44,14 @@
 ;; Custom loads
 (load! "me.el")
 
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type 'relative)
+
 (display-battery-mode 1)
 (beacon-mode 1)
 
+;; Major mode configurations
 ;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -163,17 +168,16 @@
 (define-key global-map (kbd "<f8>") 'deft)
 (define-key mode-specific-map (kbd "f") 'deft-find-file)
 (map! :leader "f o" #'deft-find-file)
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
 
-;; olivetti ---------------------
+;; Minor modes
+;; olivetti
 (setq olivetti-body-width 120)
 (map! :map ctl-x-map "t o" #'olivetti-mode)
-
+;; yasnippets
 (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 (require 'warnings)
 (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
+;;
 
 ;; Custom faces
 ;; (custom-theme-set-faces 'doom-Iosvkem ())
