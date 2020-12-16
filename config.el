@@ -47,10 +47,11 @@
 (display-battery-mode 1)
 (beacon-mode 1)
 
+;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/Notes/org")
-(setq org-ellipsis " ▼ ")
+;; (setq org-ellipsis " ▼ ")
 (setq org-global-refile-targets '(("~/Dropbox/Notes/org/emacs.org" :maxlevel . 1)
                                   ("~/Dropbox/Notes/org/gtd.org" :maxlevel . 2)))
 (after! org
@@ -112,7 +113,7 @@
 (map! "C-c 0 C-w" #'org-refile-global)
 (add-hook! org-capture-mode #'yas-expand)
 
-;; org-roam ------
+;; org-roam ------------------
 (setq org-roam-directory (concat org-directory "/knowledgebase")
       org-roam-capture-templates `(("d" "default"
                                     plain #'org-roam-capture--get-point
@@ -123,8 +124,7 @@
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
 
-;; markdown-mode ------------------
-;; (add-hook 'markdown-mode-hook 'wc-mode)
+;; markdown-mode --------------
 (add-hook 'markdown-mode-hook #'prose-mode)
 
 (define-minor-mode prose-mode
@@ -144,7 +144,7 @@
       (kill-local-variable 'left-margin-width)
       (set-window-buffer nil (window-buffer)))))
 
-;; orb ------
+;; org-roam-bibtex ------------
 (setq orb-templates
   '(("r" "ref" plain (function org-roam-capture--get-point) ""
      :file-name "references/${citekey}"
@@ -154,7 +154,7 @@
 (define-key mode-specific-map (kbd "n f") 'orb-find-non-ref-file)
 (map! :leader "n r F" #'orb-find-non-ref-file)
 
-;; deft ---------------------
+;; deft -----------------------
 (setq deft-directory org-directory
       deft-recursive t
       deft-auto-save-interval -1.0
@@ -167,10 +167,9 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
-;; olivetti -----------------
+;; olivetti ---------------------
 (setq olivetti-body-width 120)
 (map! :map ctl-x-map "t o" #'olivetti-mode)
-(add-hook! olivetti-mode ())
 
 (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 (require 'warnings)
