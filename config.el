@@ -28,6 +28,8 @@
 (setq doom-theme 'doom-sourcerer)
 
 ;; My configurations
+;; Scratch buffer message
+(setq initial-scratch-message (concat ";; \n;; Emacs loaded in " (emacs-init-time) "\n;; -----------------------------------\n;; Howdy Jewel! Welcome to Emacs.\n;; Today is " (format-time-string "%d %B, %A")  "\n"))
 ;; (add-load-path! "../.emacs.d/")
 ;; Set default frame dimensions
 (add-to-list 'default-frame-alist '(height . 36))
