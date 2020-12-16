@@ -178,6 +178,7 @@
 ;; olivetti
 (setq olivetti-body-width 120)
 (map! :map ctl-x-map "t o" #'olivetti-mode)
+(add-hook 'olivetti-mode-hook (lambda () (hide-mode-line-mode 'toggle)))
 ;; yasnippets
 (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 (require 'warnings)
