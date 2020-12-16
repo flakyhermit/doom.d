@@ -134,12 +134,15 @@
       (progn
         (display-line-numbers-mode -1)
         (mixed-pitch-mode 1)
-        (setq line-spacing 2)
-        (kill-local-variable 'left-margin-width)
-        (setq left-margin-width 2))
+        (setq line-spacing 3)
+        (setq left-margin-width 2)
+        (set-window-buffer nil (window-buffer)))
     (progn
+      (display-line-numbers-mode 1)
       (mixed-pitch-mode -1)
-      (display-line-numbers-mode 1))))
+      (kill-local-variable 'line-spacing)
+      (kill-local-variable 'left-margin-width)
+      (set-window-buffer nil (window-buffer)))))
 
 ;; orb ------
 (setq orb-templates
