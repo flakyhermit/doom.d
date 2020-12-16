@@ -128,7 +128,7 @@
 (add-hook 'markdown-mode-hook #'prose-mode)
 
 (define-minor-mode prose-mode
-  "For editing prose"
+  "Visual tweaks for editing prose"
   :lighter " prose"
   (if (eq prose-mode t)
       (progn
