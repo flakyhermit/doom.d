@@ -89,12 +89,16 @@
           ("r" "Add an ARTICLE to read later" checkitem
            (file+olp+datetree ,(concat org-directory "/lists/read-later.org"))
            "- [ ] %:annotation %?\n")
+          ("e" "Emacs")
+          ("ed" "A DOOM EMACS tip or customizaiton idea" entry
+           (file+olp+datetree ,(concat org-directory "/doom.org"))
+           "- %?\n")
+          ("ee" "An Emacs customization idea" entry
+           (file+headline ,(concat org-directory "/emacs.org") "To-do")
+           "* TODO %? \n\n")
           ("v" "Add a word to the vocabulary list" plain
            (file+headline ,(concat org-directory "/vocabulary.org") ,(format-time-string "%F"))
-           "<voc%?\n")
-          ("e" "An Emacs customization idea" entry
-           (file+headline ,(concat org-directory "/emacs.org") "To-do")
-           "* TODO %? \n\n"))))
+           "<voc%?\n"))))
 (map! :leader "X" #'counsel-org-capture)
 (map! :leader "A" #'org-agenda)
 (map! :map mode-specific-map "a" #'org-agenda)
