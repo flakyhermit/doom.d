@@ -177,7 +177,8 @@
 (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 (require 'warnings)
 (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
-;;
+;; multi-term
+(setq multi-term-dedicated-window-height 12)
 
 ;; Custom faces
 ;; (custom-theme-set-faces 'doom-Iosvkem ())
