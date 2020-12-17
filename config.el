@@ -122,6 +122,8 @@
     (org-refile)))
 (map! "C-c 0 C-w" #'org-refile-global)
 (add-hook! org-capture-mode #'yas-expand)
+(doom-themes-set-faces nil
+  '(org-document-title :height 150))
 
 ;; org-roam ------------------
 (setq org-roam-directory (concat org-directory "/knowledgebase")
@@ -136,6 +138,8 @@
 
 ;; markdown-mode --------------
 (add-hook 'markdown-mode-hook #'prose-mode)
+(doom-themes-set-faces nil
+  '(markdown-header-face-1 :height 150 :inherit 'markdown-header-face))
 
 (define-minor-mode prose-mode
   "Visual tweaks for editing prose"
