@@ -181,7 +181,7 @@
 ;; Minor modes
 ;; olivetti
 (setq olivetti-body-width 120)
-(map! :map ctl-x-map "t o" #'olivetti-mode)
+(map! :leader :desc "Olivetti mode" "t o"  #'olivetti-mode)
 (add-hook 'olivetti-mode-hook (lambda () (hide-mode-line-mode 'toggle)))
 ;; yasnippets
 (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
