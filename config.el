@@ -133,6 +133,8 @@
                                    :file-name "%<%Y%m%d%H%M%S>-${slug}"
                                    :head "#+title: ${title}\n#+created: %U\n"
                                    :unnarrowed t)))
+(setq org-roam-buffer-position 'bottom
+      org-roam-buffer-height 12)
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
 
