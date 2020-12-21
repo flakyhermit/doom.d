@@ -66,7 +66,7 @@
                                   ("~/Dropbox/Notes/org/gtd.org" :maxlevel . 2)))
 (after! org
   (setq org-return-follows-link t
-        org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "REFL(r)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
+        org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
         org-inbox-file "~/Dropbox/Notes/org/inbox.org"
         org-agenda-files '("~/Dropbox/Notes/org")
         org-agenda-span 'week
