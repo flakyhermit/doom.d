@@ -137,6 +137,8 @@
       org-roam-buffer-height 12)
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
+(doom-themes-set-faces nil
+  '(org-roam-link :inherit 'org-link :underline nil))
 
 ;; markdown-mode --------------
 (add-hook 'markdown-mode-hook #'prose-mode)
