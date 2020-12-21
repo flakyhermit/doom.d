@@ -7,6 +7,9 @@
    '((eval progn
            (olivetti-mode 1)
            (flyspell-mode 1))
+     (org-refile-targets
+      (buffer-file-name :maxlevel . 2))
+     (org-log-into-drawer . t)
      (org-refile-targets)
      (org-log-done . time))))
 (custom-set-faces
@@ -15,4 +18,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(markdown-header-face-1 ((t (:height 150 :inherit markdown-header-face))))
- '(org-document-title ((t (:height 150)))))
+ '(org-document-title ((t (:height 150))))
+ '(org-roam-link ((t (:inherit org-link :underline nil)))))
