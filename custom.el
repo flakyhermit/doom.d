@@ -7,9 +7,6 @@
    '((eval progn
            (olivetti-mode 1)
            (flyspell-mode 1))
-     (org-refile-targets
-      (buffer-file-name :maxlevel . 2))
-     (org-log-into-drawer . t)
      (org-refile-targets)
      (org-log-done . time))))
 (custom-set-faces
