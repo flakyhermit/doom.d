@@ -6,6 +6,13 @@
  '(safe-local-variable-values
    '((eval progn
            (olivetti-mode 1)
+           (markdown-toggle-markup-hiding t)
+           (flyspell-mode 1))
+     (org-refile-targets
+      (buffer-file-name :maxlevel . 2))
+     (org-log-into-drawer . t)
+     (eval progn
+           (olivetti-mode 1)
            (flyspell-mode 1))
      (org-refile-targets)
      (org-log-done . time))))
