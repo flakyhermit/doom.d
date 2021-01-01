@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
- (setq doom-font (font-spec :family "Input Mono Narrow" :size 19 :weight 'regular)
-       doom-variable-pitch-font (font-spec :family "Input Mono Narrow" :size 22))
+ (setq doom-font (font-spec :family "Jetbrains Mono" :size 19 :weight 'regular)
+       doom-variable-pitch-font (font-spec :family "Jetbrains Mono" :size 22))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -57,6 +57,9 @@
 ;; Move the cursor to the new window when splitting
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
+
+;; ivy ----------------------
+(setq ivy-use-selectable-prompt t)
 
 ;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
@@ -129,6 +132,7 @@
 (add-hook! org-capture-mode #'yas-expand)
 (doom-themes-set-faces nil
   '(org-document-title :height 150))
+(setq org-superstar-headline-bullets-list '(187))
 
 ;; org-roam ------------------
 (setq org-roam-directory (concat org-directory "/knowledgebase")
