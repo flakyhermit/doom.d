@@ -83,10 +83,10 @@
         `(("t" "Add a random capture to GTD" entry
            (file+olp ,(concat org-directory "/gtd.org") "Inbox")
            "* %?\n")
-          ("p" "Protocol" entry (file ,(concat org-roam-directory "/" org-roam-dailies-directory (format-time-string "%F") ".org"))
+          ("W" "Web capture" entry (file ,(concat org-roam-directory "/" org-roam-dailies-directory (format-time-string "%F") ".org"))
            "* %^{Title}\nSource: [[%:link][%:description]]\n#+begin_quote\n%i\n#+end_quote\n%?")
-          ("L" "Protocol Link" entry (file ,(concat org-roam-directory "/" org-roam-dailies-directory (format-time-string "%F") ".org"))
-           "* [[%:link][%:description]] \nCaptured On: %U\n%?")
+          ("L" "Web capture link" entry (file ,(concat org-roam-directory "/" org-roam-dailies-directory (format-time-string "%F") ".org"))
+           "* [[%:link][%:description]] \n%?")
           ("T" "Just a THOUGHT" entry
            (file ,(concat org-directory "/inbox.org"))
            "* %?\n")
