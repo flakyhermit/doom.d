@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
- (setq doom-font (font-spec :family "Input Mono Narrow" :size 19 :weight 'regular)
-       doom-variable-pitch-font (font-spec :family "Input Mono Narrow" :size 22))
+ (setq doom-font (font-spec :family "Jetbrains Mono" :size 19 :weight 'regular)
+       doom-variable-pitch-font (font-spec :family "Jetbrains Mono" :size 22))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -37,6 +37,7 @@
 
 ;; Global keybindings
 (map! "C-x k" #'kill-this-buffer)
+(map! :leader "k" #'kill-this-buffer)
 (map! "<f9>" #'+term/toggle)
 
 ;; Important hooks
@@ -46,22 +47,30 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type 'absolute)
 
 (display-battery-mode 1)
 (beacon-mode 1)
 
 ;; Major mode configurations
+;; evil ---------------------
+;; Move the cursor to the new window when splitting
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
+
+;; ivy ----------------------
+(setq ivy-use-selectable-prompt t)
+
 ;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/Notes/org")
-;; (setq org-ellipsis " ▼ ")
+(setq org-ellipsis " ▼ ")
 (setq org-global-refile-targets '(("~/Dropbox/Notes/org/emacs.org" :maxlevel . 1)
                                   ("~/Dropbox/Notes/org/gtd.org" :maxlevel . 2)))
 (after! org
   (setq org-return-follows-link t
-        org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "REFL(r)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
+        org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
         org-inbox-file "~/Dropbox/Notes/org/inbox.org"
         org-agenda-files '("~/Dropbox/Notes/org")
         org-agenda-span 'week
@@ -74,6 +83,10 @@
         `(("t" "Add a random capture to GTD" entry
            (file+olp ,(concat org-directory "/gtd.org") "Inbox")
            "* %?\n")
+          ("W" "Web capture" entry (file ,(concat org-roam-directory "/" org-roam-dailies-directory (format-time-string "%F") ".org"))
+           "* %^{Title}\nSource: [[%:link][%:description]]\n#+begin_quote\n%i\n#+end_quote\n%?")
+          ("L" "Web capture link" entry (file ,(concat org-roam-directory "/" org-roam-dailies-directory (format-time-string "%F") ".org"))
+           "* [[%:link][%:description]] \n%?")
           ("T" "Just a THOUGHT" entry
            (file ,(concat org-directory "/inbox.org"))
            "* %?\n")
@@ -117,6 +130,9 @@
     (org-refile)))
 (map! "C-c 0 C-w" #'org-refile-global)
 (add-hook! org-capture-mode #'yas-expand)
+(doom-themes-set-faces nil
+  '(org-document-title :height 150))
+(setq org-superstar-headline-bullets-list '(187))
 
 ;; org-roam ------------------
 (setq org-roam-directory (concat org-directory "/knowledgebase")
@@ -126,11 +142,17 @@
                                    :file-name "%<%Y%m%d%H%M%S>-${slug}"
                                    :head "#+title: ${title}\n#+created: %U\n"
                                    :unnarrowed t)))
+(setq org-roam-buffer-position 'bottom
+      org-roam-buffer-height 12)
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
+(doom-themes-set-faces nil
+  '(org-roam-link :inherit 'org-link :underline nil))
 
 ;; markdown-mode --------------
 (add-hook 'markdown-mode-hook #'prose-mode)
+(doom-themes-set-faces nil
+  '(markdown-header-face-1 :height 150 :inherit 'markdown-header-face))
 
 (define-minor-mode prose-mode
   "Visual tweaks for editing prose"
@@ -172,7 +194,8 @@
 ;; Minor modes
 ;; olivetti
 (setq olivetti-body-width 120)
-(map! :map ctl-x-map "t o" #'olivetti-mode)
+(map! :leader :desc "Olivetti mode" "t o"  #'olivetti-mode)
+(add-hook 'olivetti-mode-hook (lambda () (hide-mode-line-mode 'toggle)))
 ;; yasnippets
 (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 (require 'warnings)
