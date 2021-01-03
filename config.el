@@ -142,10 +142,19 @@
                                    :file-name "%<%Y%m%d%H%M%S>-${slug}"
                                    :head "#+title: ${title}\n#+created: %U\n"
                                    :unnarrowed t)))
-(setq org-roam-buffer-position 'bottom
-      org-roam-buffer-height 12)
+(setq org-roam-buffer-position 'right
+      +org-roam-open-buffer-on-find-file nil)
+(setq org-roam-capture-ref-templates '(("r" "ref"
+                                        plain #'org-roam-capture--get-point "\n%?"
+                                        :file-name "refs/%<%Y%m%d%H%M%S>-${slug}"
+                                        :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_tags: ref ${Type}\n#+created: %U\n"
+                                        :unnarrowed t)))
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
+(defun org-roam-capture-ref ()
+  (interactive)
+  (let ((org-roam-capture-templates org-roam-capture-ref-templates))
+    (org-roam-capture nil "r")))
 (doom-themes-set-faces nil
   '(org-roam-link :inherit 'org-link :underline nil))
 (map! :leader
