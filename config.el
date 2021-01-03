@@ -148,6 +148,22 @@
 (add-hook 'org-mode-hook #'prose-mode)
 (doom-themes-set-faces nil
   '(org-roam-link :inherit 'org-link :underline nil))
+(map! :leader
+      (:prefix-map ("r" . "roam")
+      :desc "org-roam" "r" #'org-roam
+      :desc "org-roam-insert" "i" #'org-roam-insert
+      :desc "org-roam-insert-immediate" "I" #'org-roam-insert-immediate
+      :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
+      :desc "org-roam-find-file" "f" #'org-roam-find-file
+      :desc "org-roam-show-graph" "g" #'org-roam-show-graph
+      :desc "org-roam-capture" "c" #'org-roam-capture
+      :desc "org-roam-dailies-capture-today" "j" #'org-roam-dailies-capture-today
+      :desc "org-roam-dailies-find-today" "t" #'org-roam-dailies-find-today
+      (:prefix ("d" . "dailies")
+       :desc "Yesterday" "y" #'org-roam-dailies-find-yesterday
+       :desc "Today" "t" #'org-roam-dailies-find-today
+       :desc "Tomorrow" "m" #'org-roam-dailies-find-tomorrow
+       :desc "Arbitary date" "d" #'org-roam-dailies-find-date)))
 
 ;; markdown-mode --------------
 (add-hook 'markdown-mode-hook #'prose-mode)
