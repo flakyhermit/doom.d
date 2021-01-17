@@ -19,13 +19,13 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
- (setq doom-font (font-spec :family "Jetbrains Mono" :size 19 :weight 'regular)
-       doom-variable-pitch-font (font-spec :family "Jetbrains Mono" :size 22))
+ (setq doom-font (font-spec :family "Iosevka SS04" :size 19 :weight 'regular)
+       doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 24))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
+;; available. You can either set `wdoom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-sourcerer)
+(setq doom-theme 'doom-Iosvkem)
 
 ;; Global settings
 ;; Scratch buffer message
@@ -33,11 +33,12 @@
 ;; (add-load-path! "../.emacs.d/")
 ;; Set default frame dimensions
 (add-to-list 'default-frame-alist '(height . 36))
-(add-to-list 'default-frame-alist '(width . 120))
+(add-to-list 'default-frame-alist '(width . 125))
 
 ;; Global keybindings
 (map! "C-x k" #'kill-this-buffer)
 (map! :leader "k" #'kill-this-buffer)
+(map! :leader "B" #'switch-to-buffer)
 (map! "<f9>" #'+term/toggle)
 
 ;; Important hooks
@@ -49,7 +50,8 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'absolute)
 
-(display-battery-mode 1)
+(display-time-mode 1)
+;; (display-battery-mode 1)
 (beacon-mode 1)
 
 ;; Major mode configurations
@@ -93,8 +95,11 @@
           ("Q" "A QUOTE" entry
            (file ,(concat org-directory "/quotes.org"))
            "* %?\n\n")
-          ("b" "Add a BLOG post IDEA" entry
-           (file ,(concat org-directory "/blog-post-ideas.org"))
+          ("i" "Add a BLOG post IDEA" entry
+           (file+headline ,(concat org-directory "/blog-post-ideas.org") "Posts")
+           "* %?\nCaptured On: %U")
+          ("b" "Add a BLOG journal entry" entry
+           (file+olp+datetree ,(concat org-directory "/blog-post-ideas.org") "Journal")
            "* %?\n")
           ("p" "A project IDEA" entry
            (file ,(concat org-directory "/projects.org"))
