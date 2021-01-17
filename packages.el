@@ -54,3 +54,5 @@
 (package! org-roam-bibtex)
 (package! crux)
 (package! beacon)
+(package! powerthesaurus)
+(package! sdcv)

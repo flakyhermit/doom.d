@@ -143,6 +143,7 @@
        ;;ocaml             ; an objective camel
        (org                ; organize your plain life in plain text
         +roam
+        +dragndrop
         +pretty)
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
