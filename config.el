@@ -41,11 +41,6 @@
 (map! :leader "B" #'switch-to-buffer)
 (map! "<f9>" #'+term/toggle)
 
-;; Important hooks
-
-;; Custom loads
-(load! "me.el")
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'absolute)
@@ -248,6 +243,8 @@
 ;; multi-term
 (setq multi-term-dedicated-window-height 12)
 
+;; Custom loads
+(load! "me.el")
 ;; Custom faces
 ;; (custom-theme-set-faces 'doom-Iosvkem ())
 
