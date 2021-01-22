@@ -151,7 +151,7 @@
       +org-roam-open-buffer-on-find-file nil)
 (setq org-roam-capture-ref-templates '(("r" "ref"
                                         plain #'org-roam-capture--get-point "\n%?"
-                                        :file-name "refs/%<%Y%m%d%H%M%S>-${slug}"
+                                        :file-name "references/%<%Y%m%d%H%M%S>-${slug}"
                                         :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_tags: ref ${Type}\n#+created: %U\n"
                                         :unnarrowed t)))
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
@@ -204,12 +204,27 @@
 ;; org-roam-bibtex ------------
 (setq orb-templates
   '(("r" "ref" plain (function org-roam-capture--get-point) ""
-     :file-name "references/${citekey}"
-     :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_tags: ref\n#+created: %U\n" ; <--
+     :file-name "references/%<%Y%m%d%H%M%S>-${citekey}"
+     :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_tags: ref\n#+created: %U\n\n* ${title}\n%?"
      :unnarrowed t)))
 (define-key mode-specific-map (kbd "n a") 'orb-note-actions)
 (define-key mode-specific-map (kbd "n f") 'orb-find-non-ref-file)
-(map! :leader "n r F" #'orb-find-non-ref-file)
+(map! :leader "r F" #'orb-find-non-ref-file)
+(map! :leader "r o" #'orb-note-actions)
+
+(use-package! org-ref
+    :after org)
+
+;; org-ref --------------------
+(setq org-ref-notes-directory "~/Dropbox/Notes/org/knowledgebase/references"
+      org-ref-default-bibliography (concat org-ref-notes-directory "/references.bib")
+      org-ref-pdf-directory "~/Dropbox/Zotero/")
+
+;; helm-bibtex ----------------
+(setq bibtex-completion-pdf-field "file"
+      bibtex-completion-bibliography org-ref-default-bibliography
+      bibtex-completion-library-path '("~/Dropbox/Zotero/"))
+(map! :leader "r h" #'helm-bibtex)
 
 ;; deft -----------------------
 (setq deft-directory org-directory

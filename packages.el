@@ -56,3 +56,4 @@
 (package! beacon)
 (package! powerthesaurus)
 (package! sdcv)
+(package! org-ref)
