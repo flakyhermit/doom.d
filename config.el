@@ -28,6 +28,10 @@
 (setq doom-theme 'doom-Iosvkem)
 
 ;; Global settings
+;; Set environment variables
+(setenv "DROPBOX" "~/Dropbox")
+(setenv "ORG" (concat (getenv "DROPBOX") "/Notes/org"))
+
 ;; Scratch buffer message
 (setq initial-scratch-message (concat ";; Emacs loaded in " (emacs-init-time) "\n"
                                       ";; This is the *scartch* buffer \n"))
@@ -62,15 +66,16 @@
 ;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Dropbox/Notes/org")
+(setq org-directory (getenv "ORG"))
+(defmacro org-path (filename)
+    (expand-file-name filename org-directory))
 (setq org-ellipsis " ▼ ")
-(setq org-global-refile-targets '(("~/Dropbox/Notes/org/emacs.org" :maxlevel . 1)
-                                  ("~/Dropbox/Notes/org/gtd.org" :maxlevel . 2)))
+(setq org-global-refile-targets '(((org-path "emacs.org") :maxlevel . 1)
+                                  ((org-path "gtd.org"):maxlevel . 2)))
 (after! org
   (setq org-return-follows-link t
         org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
-        org-inbox-file "~/Dropbox/Notes/org/inbox.org"
-        org-agenda-files '("~/Dropbox/Notes/org")
+        org-agenda-files '((org-path "emacs.org"))
         org-agenda-span 'week
         org-refile-targets org-global-refile-targets
         org-archive-location (concat org-directory "/archive/%s_archive::")
@@ -154,7 +159,7 @@
 ;; There's a local `org-latex-classes' set in .dir-locals.el in the org-directory
 
 ;; org-roam ------------------
-(setq org-roam-directory (concat org-directory "/knowledgebase")
+(setq org-roam-directory (org-path "knowledgebase")
       org-roam-capture-templates `(("d" "default"
                                     plain #'org-roam-capture--get-point
                                    "\n- Sources :: \n- Tags :: %?\n\n"
@@ -230,8 +235,8 @@
   :after org)
 
 ;; org-ref --------------------
-(setq org-ref-notes-directory "~/Dropbox/Notes/org/knowledgebase/references"
-      org-ref-default-bibliography (concat org-ref-notes-directory "/references.bib")
+(setq org-ref-notes-directory (org-path "knowledgebase/references")
+      org-ref-default-bibliography (expand-file-name "references.bib" org-ref-notes-directory)
       org-ref-pdf-directory "~/Dropbox/Zotero/") ;; TODO Not required now. Fix this later.
 
 ;; helm-bibtex ----------------
@@ -256,7 +261,7 @@
 (map! :leader :desc "Olivetti mode" "t o"  #'olivetti-mode)
 (add-hook 'olivetti-mode-hook (lambda () (hide-mode-line-mode 'toggle)))
 ;; yasnippets
-(add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+(add-to-list 'yas-snippet-dirs (expand-file-name "snippets" (doom-dir)))
 (require 'warnings)
 (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 ;; multi-term
