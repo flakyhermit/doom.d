@@ -133,6 +133,24 @@
 (doom-themes-set-faces nil
   '(org-document-title :height 150))
 (setq org-superstar-headline-bullets-list '(187))
+;; LaTeX export configuration
+(setq org-latex-compiler "xelatex"
+      org-latex-pdf-process (list (concat "latexmk -"
+                                          org-latex-compiler
+                                          " -recorder -synctex=1 -bibtex -bibtex-cond %b")))
+(setq org-latex-default-packages-alist
+      '(("" "graphicx" t)
+        ("" "grffile" t)
+        ("" "longtable" nil)
+        ("" "wrapfig" nil)
+        ("" "rotating" nil)
+        ("normalem" "ulem" t)
+        ("" "amsmath" t)
+        ("" "textcomp" t)
+        ("" "amssymb" t)
+        ("" "capt-of" nil)
+        ("" "hyperref" nil)))
+;; There's a local `org-latex-classes' set in .dir-locals.el in the org-directory
 
 ;; org-roam ------------------
 (setq org-roam-directory (concat org-directory "/knowledgebase")
