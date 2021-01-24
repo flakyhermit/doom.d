@@ -32,6 +32,11 @@
 (setenv "DROPBOX" "~/Dropbox")
 (setenv "ORG" (concat (getenv "DROPBOX") "/Notes/org"))
 
+;; Start server
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 ;; Scratch buffer message
 (setq initial-scratch-message (concat ";; Emacs loaded in " (emacs-init-time) "\n"
                                       ";; This is the *scartch* buffer \n"))
