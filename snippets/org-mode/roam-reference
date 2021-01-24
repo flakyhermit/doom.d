@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: roam-reference
+# key: rref
+# --
+#+roam_tags: ref $1
