@@ -20,7 +20,7 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
  (setq doom-font (font-spec :family "Iosevka SS04" :size 19 :weight 'regular)
-       doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 24))
+       doom-variable-pitch-font (font-spec :family "Iosevka Sparkle" :size 24))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `wdoom-theme' or manually load a theme with the
@@ -29,7 +29,8 @@
 
 ;; Global settings
 ;; Scratch buffer message
-(setq initial-scratch-message (concat ";; \n;; Emacs loaded in " (emacs-init-time) "\n;; -----------------------------------\n;; Howdy Jewel! Welcome to Emacs.\n;; Today is " (format-time-string "%d %B, %A")  "\n"))
+(setq initial-scratch-message (concat ";; Emacs loaded in " (emacs-init-time) "\n"
+                                      ";; This is the *scartch* buffer \n"))
 ;; (add-load-path! "../.emacs.d/")
 ;; Set default frame dimensions
 (add-to-list 'default-frame-alist '(height . 36))
@@ -226,12 +227,12 @@
 (map! :leader "r o" #'orb-note-actions)
 
 (use-package! org-ref
-    :after org)
+  :after org)
 
 ;; org-ref --------------------
 (setq org-ref-notes-directory "~/Dropbox/Notes/org/knowledgebase/references"
       org-ref-default-bibliography (concat org-ref-notes-directory "/references.bib")
-      org-ref-pdf-directory "~/Dropbox/Zotero/")
+      org-ref-pdf-directory "~/Dropbox/Zotero/") ;; TODO Not required now. Fix this later.
 
 ;; helm-bibtex ----------------
 (setq bibtex-completion-pdf-field "file"
