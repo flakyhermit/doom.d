@@ -20,7 +20,7 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
  (setq doom-font (font-spec :family "Iosevka SS04" :size 19 :weight 'regular)
-       doom-variable-pitch-font (font-spec :family "Iosevka Sparkle" :size 24))
+       doom-variable-pitch-font (font-spec :family "Iosevka Etoile" :size 24))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `wdoom-theme' or manually load a theme with the
