@@ -167,7 +167,7 @@
 (setq org-roam-directory (org-path "knowledgebase")
       org-roam-capture-templates `(("d" "default"
                                     plain #'org-roam-capture--get-point
-                                   "\n- Sources :: \n- Tags :: %?\n\n"
+                                   "\nSources: \nTags: %?\n-----\n\n"
                                    :file-name "%<%Y%m%d%H%M%S>-${slug}"
                                    :head "#+title: ${title}\n#+created: %U\n"
                                    :unnarrowed t)))
