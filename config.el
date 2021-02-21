@@ -66,8 +66,9 @@
       evil-vsplit-window-right t)
 
 ;; ivy ----------------------
-(setq ivy-use-selectable-prompt t
-      ivy-height 10)
+(after! ivy
+  (setq ivy-use-selectable-prompt t
+        ivy-height 10))
 
 ;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
