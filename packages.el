@@ -57,3 +57,4 @@
 (package! powerthesaurus)
 (package! sdcv)
 (package! org-ref)
+(package! org-roam-server)
