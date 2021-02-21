@@ -66,7 +66,8 @@
       evil-vsplit-window-right t)
 
 ;; ivy ----------------------
-(setq ivy-use-selectable-prompt t)
+(setq ivy-use-selectable-prompt t
+      ivy-height 10)
 
 ;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
@@ -95,9 +96,6 @@
            "* %^{Title}\nSource: [[%:link][%:description]]\n#+begin_quote\n%i\n#+end_quote\n%?")
           ("L" "Web capture link" entry (file ,(concat org-roam-directory "/" org-roam-dailies-directory (format-time-string "%F") ".org"))
            "* [[%:link][%:description]] \n%?")
-          ("T" "Just a THOUGHT" entry
-           (file ,(concat org-directory "/inbox.org"))
-           "* %?\n")
           ("Q" "A QUOTE" entry
            (file ,(concat org-directory "/quotes.org"))
            "* %?\n\n")
@@ -108,14 +106,11 @@
            (file+olp+datetree ,(concat org-directory "/blog-post-ideas.org") "Journal")
            "* %?\n")
           ("p" "A project IDEA" entry
-           (file ,(concat org-directory "/projects.org"))
+           (file+headline ,(concat org-directory "/projects.org") "Ideas")
            "* %?\n")
           ("B" "Add a BOOK to the 'considering' list" entry
            (file+olp ,(concat org-directory "/lists/books.org") "Considering")
            "* <book%?\n")
-          ("k" "Add a BOOK to read with Krys" entry
-           (file+olp ,(concat org-directory "/lists/books.org") "Shelved" "Fiction")
-           "* <book%? :krys:\n")
           ("r" "Add an ARTICLE to read later" checkitem
            (file+olp+datetree ,(concat org-directory "/lists/read-later.org"))
            "- [ ] %:annotation %?\n")
