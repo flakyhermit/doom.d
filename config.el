@@ -117,10 +117,13 @@
            "- [ ] %:annotation %?\n")
           ("e" "Emacs")
           ("ed" "A DOOM EMACS tip or customizaiton idea" entry
-           (file+olp+datetree ,(concat org-directory "/doom.org"))
+           (file+olp+datetree ,(concat org-directory "/emacs/doom.org"))
            "* %?\n")
           ("ee" "An Emacs customization idea" entry
-           (file+headline ,(concat org-directory "/emacs.org") "To-do")
+           (file+headline ,(concat org-directory "/emacs/emacs.org") "To-do")
+           "* TODO %? \n\n")
+          ("eo" "An ORG mode tip/customization" entry
+           (file+headline ,(concat org-directory "/emacs/org.org") "To-do")
            "* TODO %? \n\n")
           ("v" "Add a word to the vocabulary list" plain
            (file+headline ,(concat org-directory "/vocabulary.org") ,(format-time-string "%F"))
