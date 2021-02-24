@@ -101,10 +101,10 @@
            (file ,(concat org-directory "/quotes.org"))
            "* %?\n\n")
           ("i" "Add a BLOG post IDEA" entry
-           (file+headline ,(concat org-directory "/blog-post-ideas.org") "Posts")
+           (file+headline ,(concat org-directory "/blog.org") "Posts")
            "* %?\nCaptured On: %U")
           ("b" "Add a BLOG journal entry" entry
-           (file+olp+datetree ,(concat org-directory "/blog-post-ideas.org") "Journal")
+           (file+olp+datetree ,(concat org-directory "/blog.org") "Journal")
            "* %?\n")
           ("p" "A project IDEA" entry
            (file+headline ,(concat org-directory "/projects.org") "Ideas")
