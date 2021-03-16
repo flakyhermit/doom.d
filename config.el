@@ -87,10 +87,13 @@
 (after! org
   (setq org-return-follows-link t
         org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
-        org-agenda-files `(,(org-path "emacs.org")
+        org-agenda-files `(,(org-path "inbox.org")
                            ,(org-path "gtd.org"))
         org-agenda-span 'week
-        org-refile-targets org-global-refile-targets
+        org-agenda-custom-commands '(("r" "Stuff to add to ROAM" tags-todo "roam")
+                                     ("A" "Add to anki" tags-todo "anki")))
+
+  (setq org-refile-targets org-global-refile-targets
         org-archive-location (concat org-directory "/archive/%s_archive::")
         org-startup-with-inline-images t
         org-indent-indentation-per-level 1
