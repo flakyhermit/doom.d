@@ -87,7 +87,8 @@
 (after! org
   (setq org-return-follows-link t
         org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
-        org-agenda-files '((org-path "emacs.org"))
+        org-agenda-files `(,(org-path "emacs.org")
+                           ,(org-path "gtd.org"))
         org-agenda-span 'week
         org-refile-targets org-global-refile-targets
         org-archive-location (concat org-directory "/archive/%s_archive::")
