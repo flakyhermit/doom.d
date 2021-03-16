@@ -48,8 +48,12 @@
 ;; Global keybindings
 (map! "C-x k" #'kill-this-buffer)
 (map! :leader "k" #'kill-this-buffer)
-(map! :leader "B" #'switch-to-buffer)
+(map! :leader "P" #'projectile-find-file)
 (map! "<f9>" #'+term/toggle)
+(map! :leader "SPC" #'+ivy/projectile-find-file)
+(map! :leader "a" #'evil-switch-to-windows-last-buffer)
+(map! :leader "l" #'projectile-find-file)
+(map! :leader "f x" #'crux-open-with)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
