@@ -62,6 +62,7 @@
 (display-time-mode 1)
 ;; (display-battery-mode 1)
 (beacon-mode 1)
+(amx-mode 1)
 
 ;; Major mode configurations
 ;; evil ---------------------
