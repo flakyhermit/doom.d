@@ -58,3 +58,6 @@
 (package! sdcv)
 (package! org-ref)
 (package! org-roam-server)
+(package! wordnut)
+(package! color-theme-sanityinc-tomorrow)
+(package! poet-theme)
