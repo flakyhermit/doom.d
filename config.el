@@ -81,7 +81,7 @@
 (setq org-directory (getenv "ORG"))
 (defmacro org-path (filename)
     (expand-file-name filename org-directory))
-(setq org-ellipsis " ▼ ")
+(setq org-ellipsis " › ")
 (setq org-global-refile-targets '(((org-path "emacs.org") :maxlevel . 1)
                                   ((org-path "gtd.org"):maxlevel . 2)))
 (after! org
@@ -151,7 +151,7 @@
 (add-hook! org-capture-mode #'yas-expand)
 (doom-themes-set-faces nil
   '(org-document-title :height 150))
-(setq org-superstar-headline-bullets-list '(187))
+(setq org-superstar-headline-bullets-list "※")
 ;; LaTeX export configuration
 (setq org-latex-compiler "xelatex"
       org-latex-pdf-process (list (concat "latexmk -"
