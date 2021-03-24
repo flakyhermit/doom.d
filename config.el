@@ -85,17 +85,18 @@
 (setq org-global-refile-targets '(((org-path "emacs.org") :maxlevel . 1)
                                   ((org-path "gtd.org"):maxlevel . 2)))
 (after! org
-  (setq org-return-follows-link t
-        org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
-        org-agenda-files `(,(org-path "inbox.org")
+  (setq org-agenda-files `(,(org-path "inbox.org")
                            ,(org-path "gtd.org"))
         org-agenda-span 'week
         org-agenda-custom-commands '(("r" "Stuff to add to ROAM" tags-todo "roam")
                                      ("A" "Add to anki" tags-todo "anki")))
 
-  (setq org-refile-targets org-global-refile-targets
-        org-archive-location (concat org-directory "/archive/%s_archive::")
-        org-startup-with-inline-images t
+  (setq org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
+        org-refile-targets org-global-refile-targets
+        org-archive-location (concat org-directory "/archive/%s_archive::"))
+
+  (setq org-startup-with-inline-images t
+        org-return-follows-link t
         org-indent-indentation-per-level 1
         org-hide-emphasis-markers t
         org-capture-templates
