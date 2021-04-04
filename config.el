@@ -61,7 +61,6 @@
 
 (display-time-mode 1)
 ;; (display-battery-mode 1)
-(beacon-mode 1)
 (amx-mode 1)
 
 ;; Major mode configurations
@@ -259,15 +258,15 @@
       bibtex-completion-library-path '("~/Dropbox/Zotero/"))
 (map! :leader "r h" #'helm-bibtex)
 
-;; deft -----------------------
-(setq deft-directory org-directory
-      deft-recursive t
-      deft-auto-save-interval -1.0
-      deft-extensions '("org")
-      deft-default-extension "org")
-(define-key global-map (kbd "<f8>") 'deft)
-(define-key mode-specific-map (kbd "f") 'deft-find-file)
-(map! :leader "f o" #'deft-find-file)
+;; ;; deft -----------------------
+;; (setq deft-directory org-directory
+;;       deft-recursive t
+;;       deft-auto-save-interval -1.0
+;;       deft-extensions '("org")
+;;       deft-default-extension "org")
+;; (define-key global-map (kbd "<f8>") 'deft)
+;; (define-key mode-specific-map (kbd "f") 'deft-find-file)
+;; (map! :leader "f o" #'deft-find-file)
 
 ;; Minor modes
 ;; olivetti
