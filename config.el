@@ -180,6 +180,8 @@
                                    :head "#+title: ${title}\n#+created: %U\n"
                                    :unnarrowed t)))
 (setq org-roam-buffer-position 'right
+      org-roam-db-update-method 'immediate
+      org-roam-tag-sources '(prop last-directory)
       +org-roam-open-buffer-on-find-file nil)
 (setq org-roam-capture-ref-templates '(("r" "ref"
                                         plain #'org-roam-capture--get-point "\n%?"
