@@ -188,6 +188,13 @@
                                         :unnarrowed t)))
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
+;; Custom functions
+(defun org-roam-switch-db ()
+  "Switch between multiple org-roam knowledgebases"
+  (interactive)
+  (let (( org-roam-directory-list '("~/Dropbox/Notes/org/journal" "~/Dropbox/Notes/org/knowledgebase")))
+    (cd (completing-read "Pick database: " org-roam-directory-list))
+    (find-file "index.org")))
 (defun org-roam-capture-ref ()
   (interactive)
   (let ((org-roam-capture-templates org-roam-capture-ref-templates))
