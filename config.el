@@ -102,10 +102,11 @@
         `(("t" "Add a random capture to GTD" entry
            (file+olp ,(concat org-directory "/gtd.org") "Inbox")
            "* %?\n")
-          ("W" "Web capture" entry (file ,(concat org-roam-directory "/" org-roam-dailies-directory (format-time-string "%F") ".org"))
-           "* %^{Title}\nSource: [[%:link][%:description]]\n#+begin_quote\n%i\n#+end_quote\n%?")
-          ("L" "Web capture link" entry (file ,(concat org-roam-directory "/" org-roam-dailies-directory (format-time-string "%F") ".org"))
-           "* [[%:link][%:description]] \n%?")
+          ("W" "Web capture" entry  (file ,(org-path "clippings.org"))
+           "* %^{Title}\nSource: %:annotation \nCaptured: %U\n#+begin_quote\n%i\n#+end_quote\n%?"
+           :prepend t :empty-lines-before 1)
+          ("L" "Web capture link" entry (file ,(org-path "clippings.org"))
+           "* %:annotation \nCaptured: %U\n" :prepend t :immediate-finish t :empty-lines-before 1)
           ("Q" "A QUOTE" entry
            (file ,(concat org-directory "/quotes.org"))
            "* %?\n\n")
