@@ -49,14 +49,14 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(package!
-  olivetti
-  mixed-pitch
-  org-roam-bibtex
-  crux
-  powerthesaurus
-  sdcv
-  org-ref
-  org-roam-server
-  wordnut
-  color-theme-sanityinc-tomorrow)
+(package! olivetti)
+(package! mixed-pitch)
+(package! org-roam-bibtex)
+(package! crux)
+(package! beacon)
+(package! powerthesaurus)
+(package! sdcv)
+(package! org-ref)
+(package! org-roam-server)
+(package! wordnut)
+(package! color-theme-sanityinc-tomorrow)
