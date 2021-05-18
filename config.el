@@ -60,6 +60,7 @@
 (setq display-line-numbers-type 'absolute)
 
 (display-time-mode 1)
+(beacon-mode 1)
 ;; (display-battery-mode 1)
 (amx-mode 1)
 ;; Facilitate local wordnut lookup
@@ -67,6 +68,13 @@
 (set-popup-rule! "^\\*" :height 0.4)
 (set-popup-rule! "^\\*WordNut*" :height 0.2)
 
+;; File operations
+(setq delete-by-moving-to-trash t)
+
+;; Configure backups
+(setq make-backup-files t)
+
+(setq epa-file-encrypt-to '("754A49D9075B89B3"))
 ;; Major mode configurations
 ;; evil ---------------------
 ;; Move the cursor to the new window when splitting
