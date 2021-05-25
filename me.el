@@ -1,18 +1,42 @@
 ;;; me.el -*- lexical-binding: t; -*-
-(defun my/journal-daily()
-  "Create a new 6-PM journal entry"
-  (interactive)
-  (setq filepath (concat "~/Dropbox/Notes/6_PMs/" (format-time-string "%F")))
-  (with-temp-file filepath
-    (insert "\n# " (format-time-string "%A, %d %B %Y") "\n\n"))
-  (find-file filepath)
-  (markdown-mode)
-  (goto-char (point-max)))
-(global-set-key (kbd "C-c j s") #'my/journal-daily)
 
-(setq gcpp-file "~/Dropbox/Notes/org/knowledgebase/references/20210114174332-gcpp_takshashila.org")
-(after! org
-  (push '("g" "GCPP Takshashila") org-capture-templates)
-  (push '("gt" "Todo" entry
-          (file+headline gcpp-file "Things to-do")
-          "* TODO %?\n") org-capture-templates))
+;; Definitions
+;; journal -----------------------
+(defvar journal-directory nil
+  "My personal journal directory.")
+
+(defun my-journal-daily (title)
+  "Create a 6PM journal entry using TITLE."
+  (interactive "M\Enter the title: ")
+  (let ((filename nil)
+        (new-flag nil))
+    ;; Check if file already exists, assing if it does
+    (setq filename
+          (seq-find (lambda (filename)
+                      (string-match (format-time-string "%F") filename))
+                    (directory-files journal-directory)))
+    ;; If it doesn't,...
+    (unless filename
+      (setq new-flag t) ;; Set the flag
+      ;; ...construct the new name
+      (setq filename
+            (concat
+             (format-time-string "%F_")
+             (string-join (mapcar #'capitalize (split-string title " ")) "_")
+             ".gpg")))
+    (setq filepath (concat journal-directory "/" filename))
+    ;; Write data into file in the background
+    (with-temp-file filepath
+      (if new-flag
+          (insert "\n" (format-time-string "%A, %d %B %Y"))
+        (insert-file-contents filepath))
+      (goto-char (point-max))
+      (insert "\n# " (capitalize title) "\n\n"))
+    ;; Open file in buffer
+    (find-file filepath)
+    (goto-char (point-max))
+    (message filename)))
+
+;; Configuration
+(setq journal-directory (concat (getenv "DROPBOX") "/Notes/6_PMs"))
+(global-set-key (kbd "C-c j s") #'my-journal-daily)
