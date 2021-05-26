@@ -250,22 +250,26 @@
 (defun org-roam-switch-db ()
   "Switch between multiple org-roam knowledgebases"
   (interactive)
-  (let (( org-roam-directory-list '("~/Dropbox/Notes/org/journal" "~/Dropbox/Notes/org/knowledgebase")))
+  (unless org-roam-mode (org-roam-mode))
+  (let ((org-roam-directory-list '("~/Dropbox/Notes/org/journal" "~/Dropbox/Notes/org/knowledgebase")))
     (cd (completing-read "Pick database: " org-roam-directory-list))
-    (find-file "index.org")))
+    (find-file "index.org")
+    (org-roam-db-build-cache)
+    (org-roam-find-file)))
 (defun org-roam-capture-ref ()
   (interactive)
   (let ((org-roam-capture-templates org-roam-capture-ref-templates))
     (org-roam-capture nil "r")))
+;; Misc
 (doom-themes-set-faces nil
   '(org-roam-link :inherit 'org-link :underline nil))
 (map! :leader
       (:prefix-map ("r" . "roam")
-      :desc "org-roam" "r" #'org-roam
-      :desc "org-roam-insert" "i" #'org-roam-insert
-      :desc "org-roam-insert-immediate" "I" #'org-roam-insert-immediate
+      :desc "org-roam" "r" #'org-roam-buffer-toggle
+      :desc "org-roam-node-insert" "i" #'org-roam-node-insert
+      ;; :desc "org-roam-insert-immediate" "I" #'org-roam-insert-immediate
       :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
-      :desc "org-roam-find-file" "f" #'org-roam-find-file
+      :desc "org-roam-node-find" "f" #'org-roam-node-find
       :desc "org-roam-show-graph" "g" #'org-roam-show-graph
       :desc "org-roam-capture" "c" #'org-roam-capture
       :desc "org-roam-dailies-capture-today" "j" #'org-roam-dailies-capture-today
@@ -275,11 +279,20 @@
        :desc "Today" "t" #'org-roam-dailies-find-today
        :desc "Tomorrow" "m" #'org-roam-dailies-find-tomorrow
        :desc "Arbitary date" "d" #'org-roam-dailies-find-date)))
-
+(map! :leader
+      (:prefix-map ("r" . "roam")
+       :desc "Switch database" "s" #'org-roam-switch-db))
 ;; markdown-mode --------------
 (add-hook 'markdown-mode-hook #'prose-mode)
 (doom-themes-set-faces nil
   '(markdown-header-face-1 :height 150 :inherit 'markdown-header-face))
+;; (setq markdown-command "pandoc -t html --css ~/.emacs.d/mdhtmlstyle.css input.md -o output.pdf")
+
+;; mixed-pitch-mode ------------
+(after! mixed-pitch
+  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-todo)
+  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-drawer)
+  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-done))
 
 (define-minor-mode prose-mode
   "Visual tweaks for editing prose"
