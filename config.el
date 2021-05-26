@@ -82,9 +82,52 @@
       evil-vsplit-window-right t)
 
 ;; ivy ----------------------
-(after! ivy
-  (setq ivy-use-selectable-prompt t
-        ivy-height 10))
+;; (after! ivy
+;;   (setq ivy-use-selectable-prompt t
+;;         ivy-height 10)
+;;   (amx-mode 1))
+
+;; vertico ------------------
+(vertico-mode 1)
+(defun +consult/project-search ()
+  (interactive)
+  (consult-ripgrep (doom-project-root)))
+(defun +consult/directory-search ()
+  (interactive)
+  (consult-ripgrep default-directory))
+(map! :leader "s p" #'+consult/project-search)
+(map! :leader "s d" #'+consult/directory-search)
+(map! :leader "s s" #'consult-line)
+;; Vertico additives
+(marginalia-mode 1)
+(setq completion-styles '(orderless)
+      completion-category-defaults nil
+      completion-category-overrides '((file (styles . (partial-completion)))))
+
+;; Do not allow the cursor in the minibuffer prompt
+(setq minibuffer-prompt-properties
+      '(read-only t cursor-intangible t face minibuffer-prompt))
+(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+;; hydra ---------------------
+;; (defhydra+ +hydra/window-nav ()
+;; ("w" other-window))
+(defhydra hydra-move ()
+  "scroll"
+  ("u" evil-scroll-up)
+  ("d" evil-scroll-down)
+  ("f" evil-scroll-page-down)
+  ("b" evil-scroll-page-up)
+  ("n" (lambda () (evil-next-line 3)))
+  ("p" (lambda () (evil-previous-line 3)))
+  ("gg" evil-goto-first-line)
+  ("G" evil-goto-line))
+(define-key evil-motion-state-map (kbd "M-u") 'hydra-move/body)
+(define-key evil-motion-state-map (kbd "M-w") '+hydra/window-nav/body)
+;; (map! :leader "w" #'+hydra/window-nav/body)
+
+;; projectile ----------------
+(setq projectile-switch-project-action #'projectile-find-file)
 
 ;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
