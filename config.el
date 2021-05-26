@@ -303,7 +303,7 @@
 (setq multi-term-dedicated-window-height 12)
 
 ;; Custom loads
-(load! "me.el")
+(load! "my.el")
 ;; Custom faces
 ;; (custom-theme-set-faces 'doom-Iosvkem ())
 
