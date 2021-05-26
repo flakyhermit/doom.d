@@ -51,7 +51,8 @@
 
 (package! olivetti)
 (package! mixed-pitch)
-(package! org-roam-bibtex)
+(package! org-roam-bibtex
+  :recipe (:branch "org-roam-v2"))
 (package! crux)
 (package! beacon)
 (package! powerthesaurus)
