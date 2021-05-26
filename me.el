@@ -9,7 +9,9 @@
   "Create a 6PM journal entry using TITLE."
   (interactive "M\Enter the title: ")
   (let ((filename nil)
-        (new-flag nil))
+        (new-flag nil)
+        (title (with-syntax-table text-mode-syntax-table
+                 (capitalize title))))
     ;; Check if file already exists, assing if it does
     (setq filename
           (seq-find (lambda (filename)
@@ -22,8 +24,8 @@
       (setq filename
             (concat
              (format-time-string "%F_")
-             (string-join (mapcar #'capitalize (split-string title " ")) "_")
-             ".gpg")))
+             (string-join (split-string title " ") "_")
+                      ".gpg")))
     (setq filepath (concat journal-directory "/" filename))
     ;; Write data into file in the background
     (with-temp-file filepath
@@ -31,7 +33,7 @@
           (insert "\n" (format-time-string "%A, %d %B %Y"))
         (insert-file-contents filepath))
       (goto-char (point-max))
-      (insert "\n# " (capitalize title) "\n\n"))
+      (insert "\n# " title "\n\n"))
     ;; Open file in buffer
     (find-file filepath)
     (goto-char (point-max))
