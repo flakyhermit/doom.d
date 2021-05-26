@@ -61,3 +61,7 @@
 (package! org-roam-server)
 (package! wordnut)
 (package! color-theme-sanityinc-tomorrow)
+(package! vertico)
+(package! orderless)
+(package! marginalia)
+(package! consult)
