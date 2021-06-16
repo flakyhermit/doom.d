@@ -156,7 +156,7 @@
         org-id-method 'ts
         org-capture-templates
         `(("t" "Add a random capture to GTD" entry
-           (file+olp ,(concat org-directory "/gtd.org") "Inbox")
+           (file+olp ,(org-path "gtd.org") "Inbox")
            "* %?\n")
           ("W" "Web capture" entry  (file ,(org-path "clippings.org"))
            "* %^{Title}\nSource: %:annotation \nCaptured: %U\n#+begin_quote\n%i\n#+end_quote\n%?"
@@ -164,35 +164,35 @@
           ("L" "Web capture link" entry (file ,(org-path "clippings.org"))
            "* %:annotation \nCaptured: %U\n" :prepend t :immediate-finish t :empty-lines-before 1)
           ("Q" "A QUOTE" entry
-           (file ,(concat org-directory "/quotes.org"))
+           (file ,(org-path "quotes.org"))
            "* %?\n\n")
           ("i" "Add a BLOG post IDEA" entry
-           (file+headline ,(concat org-directory "/blog.org") "Posts")
+           (file+headline ,(org-path "blog.org") "Posts")
            "* %?\nCaptured On: %U")
           ("b" "Add a BLOG journal entry" entry
-           (file+olp+datetree ,(concat org-directory "/blog.org") "Journal")
+           (file+olp+datetree ,(org-path "blog.org") "Journal")
            "* %?\n")
           ("p" "A project IDEA" entry
-           (file+headline ,(concat org-directory "/projects.org") "Ideas")
+           (file+headline ,(org-path "projects.org") "Ideas")
            "* %?\n")
           ("B" "Add a BOOK to the 'considering' list" entry
-           (file+olp ,(concat org-directory "/lists/books.org") "Considering")
+           (file+olp ,(org-path "lists/books.org") "Considering")
            "* <book%?\n")
           ("r" "Add an ARTICLE to read later" checkitem
-           (file+olp+datetree ,(concat org-directory "/lists/read-later.org"))
+           (file+olp+datetree ,(org-path "lists/read-later.org"))
            "- [ ] %:annotation %?\n")
           ("e" "Emacs")
           ("ed" "A DOOM EMACS tip or customizaiton idea" entry
-           (file+olp+datetree ,(concat org-directory "/emacs/doom.org"))
+           (file+olp+datetree ,(org-path "emacs/doom.org"))
            "* %?\n")
           ("ee" "An Emacs customization idea" entry
-           (file+headline ,(concat org-directory "/emacs/emacs.org") "To-do")
+           (file+headline ,(org-path "emacs/emacs.org") "To-do")
            "* TODO %? \n\n")
           ("eo" "An ORG mode tip/customization" entry
-           (file+headline ,(concat org-directory "/emacs/org.org") "To-do")
+           (file+headline ,(org-path "emacs/org.org") "To-do")
            "* TODO %? \n\n")
           ("v" "Add a word to the vocabulary list" plain
-           (file+headline ,(concat org-directory "/vocabulary.org") ,(format-time-string "%F"))
+           (file+headline ,(org-path "vocabulary.org") ,(format-time-string "%F"))
            "<voc%?\n")))
   (set-popup-rule! "^\\*Org Agenda*" :height 0.6))
 (map! :leader "X" #'org-capture)
