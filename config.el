@@ -193,8 +193,9 @@
            "* TODO %? \n\n")
           ("v" "Add a word to the vocabulary list" plain
            (file+headline ,(concat org-directory "/vocabulary.org") ,(format-time-string "%F"))
-           "<voc%?\n"))))
-(map! :leader "X" #'counsel-org-capture)
+           "<voc%?\n")))
+  (set-popup-rule! "^\\*Org Agenda*" :height 0.6))
+(map! :leader "X" #'org-capture)
 (map! :leader "A" #'org-agenda)
 (map! :map mode-specific-map "a" #'org-agenda)
 (map! :map mode-specific-map "c" #'counsel-org-capture)
