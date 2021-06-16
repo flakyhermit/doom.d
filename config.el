@@ -237,9 +237,10 @@
                                    ("r" "reference"
                                     plain "%?"
                                    :if-new (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org"
-                                                      "#+title: ${title}\n#+created: %U\n")
-                                   :unnarrowed t)))
-      ;;
+                                                      "#+title: ${title}\n#+roam_key: ${ref}\n#+created: %U\n")
+                                   :unnarrowed t))
+      org-roam-capture-ref-templates (list (nth 1 org-roam-capture-templates)))
+
 (setq org-roam-buffer-position 'right
       org-roam-db-update-method 'immediate
       org-roam-tag-sources '(prop last-directory)
