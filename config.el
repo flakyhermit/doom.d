@@ -153,6 +153,7 @@
         org-return-follows-link t
         org-indent-indentation-per-level 1
         org-hide-emphasis-markers t
+        org-id-method 'ts
         org-capture-templates
         `(("t" "Add a random capture to GTD" entry
            (file+olp ,(concat org-directory "/gtd.org") "Inbox")
