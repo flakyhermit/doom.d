@@ -263,8 +263,7 @@
     (org-roam-find-file)))
 (defun org-roam-capture-ref ()
   (interactive)
-  (let ((org-roam-capture-templates org-roam-capture-ref-templates))
-    (org-roam-capture nil "r")))
+  (org-roam-capture nil "r"))
 ;; Misc
 (doom-themes-set-faces nil
   '(org-roam-link :inherit 'org-link :underline nil))
