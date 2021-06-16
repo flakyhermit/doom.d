@@ -70,11 +70,11 @@
 
 ;; File operations
 (setq delete-by-moving-to-trash t)
-
 ;; Configure backups
 (setq make-backup-files t)
-
+;; Encryption key
 (setq epa-file-encrypt-to '("754A49D9075B89B3"))
+
 ;; Major mode configurations
 ;; evil ---------------------
 ;; Move the cursor to the new window when splitting
