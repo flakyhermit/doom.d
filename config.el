@@ -245,11 +245,6 @@
       org-roam-db-update-method 'immediate
       org-roam-tag-sources '(prop last-directory)
       +org-roam-open-buffer-on-find-file nil)
-(setq org-roam-capture-ref-templates '(("r" "ref"
-                                        plain #'org-roam-capture--get-point "\n%?"
-                                        :file-name "references/%<%Y%m%d%H%M%S>-${slug}"
-                                        :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_tags: ref ${Type}\n#+created: %U\n"
-                                        :unnarrowed t)))
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
 ;; Custom functions
