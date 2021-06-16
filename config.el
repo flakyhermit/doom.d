@@ -228,13 +228,17 @@
 ;; There's a local `org-latex-classes' set in .dir-locals.el in the org-directory
 
 ;; org-roam ------------------
-(setq org-roam-directory (org-path "knowledgebase"))
-      ;; org-roam-capture-templates `(("d" "default"
-      ;;                               plain #'org-roam-capture--get-point
-      ;;                              "\nSources: \nTags: %?\n-----\n\n"
-      ;;                              :file-name "%<%Y%m%d%H%M%S>-${slug}"
-      ;;                              :head "#+title: ${title}\n#+created: %U\n"
-      ;;                              :unnarrowed t)))
+(setq org-roam-directory (org-path "knowledgebase")
+      org-roam-capture-templates `(("d" "default"
+                                    plain "\nLabels: %?"
+                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                                      "#+title: ${title}\n#+created: %U\n")
+                                   :unnarrowed t)
+                                   ("r" "reference"
+                                    plain "%?"
+                                   :if-new (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org"
+                                                      "#+title: ${title}\n#+created: %U\n")
+                                   :unnarrowed t)))
       ;;
 (setq org-roam-buffer-position 'right
       org-roam-db-update-method 'immediate
