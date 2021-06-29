@@ -7,6 +7,10 @@
 (defcustom project-directory nil
   "My projects directory")
 
+(defun remove-punctuation (string)
+  "Remove punctuations from STRING"
+  (replace-regexp-in-string "[,.:]" "" string))
+
 (defun my-new-project (title &optional nogit)
   "Create a new project with TITLE.
 Prefix argument NOGIT prevents a git repository being initialized in the project directory."
@@ -48,7 +52,7 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
             (concat
              timestring
              "_"
-             (string-join (split-string title " ") "_")
+             (string-join (split-string (remove-punctuation title) " ") "_")
                       ".gpg")))
     (setq filepath (concat journal-directory "/" filename))
     ;; Write data into file in the background
