@@ -27,12 +27,14 @@
   (message "%d" arg)
   (let ((filename nil)
         (new-flag nil)
-        (timestring (if (= arg 4)
-                        (org-read-date)
-                      (format-time-string "%F")))
+        (time (if (= arg 4)
+                  (org-read-date nil 'to-time)
+                (encode-time (decode-time))))
+        (timestring nil)
         (title (with-syntax-table text-mode-syntax-table
                  (capitalize title))))
     ;; Check if file already exists, assing if it does
+    (setq timestring (format-time-string "%F" time))
     (setq filename
           (seq-find (lambda (filename)
                       (string-match timestring filename))
@@ -51,7 +53,7 @@
     ;; Write data into file in the background
     (with-temp-file filepath
       (if new-flag
-          (insert "\n" (format-time-string "%A, %d %B %Y" (date-to-time (concat timestring "T00:00:00+05:30"))))
+          (insert "\n" (format-time-string "%A, %d %B %Y" time))
         (apply #'encode-time (decode-time))
         (insert-file-contents filepath))
       (goto-char (point-max))
