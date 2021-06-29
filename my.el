@@ -2,9 +2,9 @@
 
 ;; Definitions
 ;; journal -----------------------
-(defvar journal-directory nil
+(defcustom journal-directory nil
   "My personal journal directory.")
-(defvar project-directory nil
+(defcustom project-directory nil
   "My projects directory")
 
 (defun my-new-project (title &optional nogit)
