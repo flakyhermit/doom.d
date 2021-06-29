@@ -9,7 +9,7 @@
 
 (defun my-new-project (title &optional nogit)
   "Create a new project with TITLE.
-   Prefix argument NOGIT prevents a git repository being initialized in the project directory"
+Prefix argument NOGIT prevents a git repository being initialized in the project directory."
   ;; Check if project existss
   (interactive "M\Enter project name: \nP")
   (save-excursion
