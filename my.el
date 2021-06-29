@@ -4,8 +4,24 @@
 ;; journal -----------------------
 (defvar journal-directory nil
   "My personal journal directory.")
+(defvar project-directory nil
+  "My projects directory")
 
-(defun my-journal-daily (title)
+(defun my-new-project (title &optional nogit)
+  "Create a new project with TITLE"
+  ;; Check if project existss
+  (interactive "M\Enter project name: \nP")
+  (save-excursion
+  (let ((dir (expand-file-name title project-directory)))
+    (unless (file-exists-p dir)
+      (make-directory dir))
+    (find-file dir)
+    (unless nogit
+      (magit-call-git "init" (magit-convert-filename-for-git
+                              (expand-file-name dir))))
+    (call-interactively #'find-file))))
+
+(defun my-journal-daily (title &optional arg)
   "Create a 6PM journal entry using TITLE."
   (interactive "M\Enter the title: ")
   (let ((filename nil)
@@ -41,4 +57,6 @@
 
 ;; Configuration
 (setq journal-directory (concat (getenv "DROPBOX") "/Notes/6_PMs"))
+(setq project-directory (expand-file-name "Projects" (getenv "HOME")))
+
 (global-set-key (kbd "C-c j s") #'my-journal-daily)
