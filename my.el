@@ -23,15 +23,19 @@
 
 (defun my-journal-daily (title &optional arg)
   "Create a 6PM journal entry using TITLE."
-  (interactive "M\Enter the title: ")
+  (interactive "M\Enter the title: \np")
+  (message "%d" arg)
   (let ((filename nil)
         (new-flag nil)
+        (timestring (if (= arg 4)
+                        (org-read-date)
+                      (format-time-string "%F")))
         (title (with-syntax-table text-mode-syntax-table
                  (capitalize title))))
     ;; Check if file already exists, assing if it does
     (setq filename
           (seq-find (lambda (filename)
-                      (string-match (format-time-string "%F") filename))
+                      (string-match timestring filename))
                     (directory-files journal-directory)))
     ;; If it doesn't,...
     (unless filename
@@ -39,14 +43,16 @@
       ;; ...construct the new name
       (setq filename
             (concat
-             (format-time-string "%F_")
+             timestring
+             "_"
              (string-join (split-string title " ") "_")
                       ".gpg")))
     (setq filepath (concat journal-directory "/" filename))
     ;; Write data into file in the background
     (with-temp-file filepath
       (if new-flag
-          (insert "\n" (format-time-string "%A, %d %B %Y"))
+          (insert "\n" (format-time-string "%A, %d %B %Y" (date-to-time (concat timestring "T00:00:00+05:30"))))
+        (apply #'encode-time (decode-time))
         (insert-file-contents filepath))
       (goto-char (point-max))
       (insert "\n# " title "\n\n"))
@@ -60,3 +66,4 @@
 (setq project-directory (expand-file-name "Projects" (getenv "HOME")))
 
 (global-set-key (kbd "C-c j s") #'my-journal-daily)
+(map! :leader "p n" #'my-new-project)
