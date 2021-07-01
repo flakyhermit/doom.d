@@ -57,7 +57,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'absolute)
+(setq display-line-numbers-type 'relative)
 
 (display-time-mode 1)
 (beacon-mode 1)
