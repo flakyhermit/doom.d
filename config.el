@@ -89,20 +89,20 @@
 
 ;; vertico ------------------
 (vertico-mode 1)
-(defun +consult/project-search ()
-  (interactive)
-  (consult-ripgrep (doom-project-root)))
-(defun +consult/directory-search ()
-  (interactive)
-  (consult-ripgrep default-directory))
-(map! :leader "s p" #'+consult/project-search)
-(map! :leader "s d" #'+consult/directory-search)
-(map! :leader "s s" #'consult-line)
-;; Vertico additives
-(marginalia-mode 1)
-(setq completion-styles '(orderless)
-      completion-category-defaults nil
-      completion-category-overrides '((file (styles . (partial-completion)))))
+;; (defun +consult/project-search ()
+;;   (interactive)
+;;   (consult-ripgrep (doom-project-root)))
+;; (defun +consult/directory-search ()
+;;   (interactive)
+;;   (consult-ripgrep default-directory))
+;; (map! :leader "s p" #'+consult/project-search)
+;; (map! :leader "s d" #'+consult/directory-search)
+;; (map! :leader "s s" #'consult-line)
+;; ;; Vertico additives
+;; (marginalia-mode 1)
+;; (setq completion-styles '(orderless)
+;;       completion-category-defaults nil
+;;       completion-category-overrides '((file (styles . (partial-completion)))))
 
 ;; Do not allow the cursor in the minibuffer prompt
 (setq minibuffer-prompt-properties
