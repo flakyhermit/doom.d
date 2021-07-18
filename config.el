@@ -42,18 +42,24 @@
                                       ";; This is the *scartch* buffer \n"))
 ;; (add-load-path! "../.emacs.d/")
 ;; Set default frame dimensions
-(add-to-list 'default-frame-alist '(height . 36))
-(add-to-list 'default-frame-alist '(width . 125))
+(add-to-list 'default-frame-alist '(height . 32))
+(add-to-list 'default-frame-alist '(width . 118))
 
 ;; Global keybindings
+;; Emacs native
+(global-set-key (kbd "C-x p") #'mark-paragraph)
+(map! :leader "f f"  #'find-file)
 (map! "C-x k" #'kill-this-buffer)
 (map! :leader "k" #'kill-this-buffer)
 (map! :leader "P" #'projectile-find-file)
 (map! "<f9>" #'+term/toggle)
-(map! :leader "SPC" #'+ivy/projectile-find-file)
+(map! :leader "SPC" #'projectile-find-file)
 (map! :leader "a" #'evil-switch-to-windows-last-buffer)
 (map! :leader "l" #'projectile-find-file)
 (map! :leader "f x" #'crux-open-with)
+(map! :leader "f r" #'crux-recentf-find-file)
+(map! :leader "," #'consult-buffer)
+
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
