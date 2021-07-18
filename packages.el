@@ -65,6 +65,6 @@
 ;; (package! vertico)
 ;; (package! orderless)
 ;; (package! marginalia)
-;; (package! consult)
+(package! consult)
 (package! vue-mode)
 (package! prettier)
