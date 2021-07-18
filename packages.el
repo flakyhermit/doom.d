@@ -53,6 +53,8 @@
 (package! mixed-pitch)
 (package! org-roam-bibtex
   :recipe (:branch "org-roam-v2"))
+(package! org-roam
+  :recipe (:host github :repo "org-roam/org-roam" :branch "v2"))
 (package! crux)
 (package! beacon)
 (package! powerthesaurus)
