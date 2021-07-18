@@ -341,7 +341,7 @@
      :unnarrowed t)))
 (define-key mode-specific-map (kbd "n a") 'orb-note-actions)
 (define-key mode-specific-map (kbd "n f") 'orb-find-non-ref-file)
-(map! :leader "r F" #'orb-find-non-ref-file)
+;; (map! :leader "r F" #'orb-find-non-ref-file)
 (map! :leader "r o" #'orb-note-actions)
 
 (use-package! org-ref
