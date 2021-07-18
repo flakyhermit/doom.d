@@ -310,7 +310,11 @@
 (after! mixed-pitch
   (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-todo)
   (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-drawer)
-  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-done))
+  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-done)
+  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-column)
+  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-column-title)
+  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-indent)
+  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-date))
 
 (define-minor-mode prose-mode
   "Visual tweaks for editing prose"
