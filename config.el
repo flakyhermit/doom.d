@@ -68,7 +68,6 @@
 (display-time-mode 1)
 (beacon-mode 1)
 (display-battery-mode 1)
-;; (amx-mode 1)
 
 ;; Facilitate local wordnut lookup
 (setq +lookup-dictionary-prefer-offline t)
