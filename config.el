@@ -217,8 +217,14 @@
 (map! "C-c 0 C-w" #'org-refile-global)
 (add-hook! org-capture-mode #'yas-expand)
 (doom-themes-set-faces nil
-  '(org-document-title :height 150))
-(setq org-superstar-headline-bullets-list "※")
+  '(term :size 15))
+;; (doom-themes-set-faces nil
+;;   '(org-document-title :weight 'bold))
+(setq org-superstar-headline-bullets-list "ᗒ")
+(setq org-superstar-item-bullet-alist
+  '((?* . ?-)
+    (?+ . ?➤)
+    (?- . ?»)))
 ;; LaTeX export configuration
 (setq org-latex-compiler "xelatex"
       org-latex-pdf-process (list (concat "latexmk -"
