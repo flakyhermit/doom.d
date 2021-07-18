@@ -287,6 +287,7 @@
       ;; :desc "org-roam-insert-immediate" "I" #'org-roam-insert-immediate
       :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
       :desc "org-roam-node-find" "f" #'org-roam-node-find
+      :desc "org-roam-ref-find" "F" #'org-roam-ref-find
       :desc "org-roam-show-graph" "g" #'org-roam-show-graph
       :desc "org-roam-capture" "c" #'org-roam-capture
       :desc "org-roam-dailies-capture-today" "j" #'org-roam-dailies-capture-today
