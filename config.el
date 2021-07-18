@@ -67,8 +67,9 @@
 
 (display-time-mode 1)
 (beacon-mode 1)
-;; (display-battery-mode 1)
-(amx-mode 1)
+(display-battery-mode 1)
+;; (amx-mode 1)
+
 ;; Facilitate local wordnut lookup
 (setq +lookup-dictionary-prefer-offline t)
 (set-popup-rule! "^\\*" :height 0.4)
@@ -88,13 +89,13 @@
       evil-vsplit-window-right t)
 
 ;; ivy ----------------------
-;; (after! ivy
-;;   (setq ivy-use-selectable-prompt t
-;;         ivy-height 10)
-;;   (amx-mode 1))
+(after! ivy
+  (setq ivy-use-selectable-prompt t
+        ivy-height 10)
+  (amx-mode 1))
 
 ;; vertico ------------------
-(vertico-mode 1)
+;; (vertico-mode 1)
 ;; (defun +consult/project-search ()
 ;;   (interactive)
 ;;   (consult-ripgrep (doom-project-root)))
