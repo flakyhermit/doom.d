@@ -129,6 +129,9 @@
 ;; projectile ----------------
 (setq projectile-switch-project-action #'projectile-find-file)
 
+;; magit ---------------------
+(map! :leader "g c a" #'magit-commit-amend)
+
 ;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
