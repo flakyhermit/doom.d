@@ -59,6 +59,7 @@
 (map! :leader "f x" #'crux-open-with)
 (map! :leader "f r" #'crux-recentf-find-file)
 (map! :leader "," #'consult-buffer)
+(map! :leader "." #'+ivy/switch-workspace-buffer)
 
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
