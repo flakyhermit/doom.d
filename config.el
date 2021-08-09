@@ -269,6 +269,7 @@
       org-roam-db-update-method 'immediate
       org-roam-tag-sources '(prop last-directory)
       +org-roam-open-buffer-on-find-file nil)
+(org-roam-setup)
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
 ;; Custom functions
