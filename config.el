@@ -91,7 +91,7 @@
 ;; ivy ----------------------
 (after! ivy
   (setq ivy-use-selectable-prompt t
-        ivy-height 10)
+        ivy-height 16)
   (amx-mode 1))
 
 ;; vertico ------------------
