@@ -308,6 +308,15 @@
 (map! :leader
       (:prefix-map ("r" . "roam")
        :desc "Switch database" "s" #'org-roam-switch-db))
+
+;; org-roam-ui ----------------
+(use-package! websocket
+  :after org-roam)
+(after! org-roam
+  (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
 ;; markdown-mode --------------
 (add-hook 'markdown-mode-hook #'prose-mode)
 (doom-themes-set-faces nil
