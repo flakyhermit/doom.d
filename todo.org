@@ -1,8 +1,0 @@
-#+TITLE: Todo
-
-* TODO Hide or change Doom banner
-* TODO Copy bookmarks over
-* TODO Add custom stuff
-* TODO Make file/dir paths standard
-And cross platform.
-Figure how to add $HOME.
