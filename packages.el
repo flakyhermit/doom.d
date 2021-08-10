@@ -51,15 +51,10 @@
 
 (package! olivetti)
 (package! mixed-pitch)
-(package! org-roam-bibtex
-  :recipe (:branch "org-roam-v2"))
-(package! org-roam
-  :recipe (:host github :repo "org-roam/org-roam" :branch "v2"))
 (package! crux)
 (package! beacon)
 (package! powerthesaurus)
 (package! org-ref)
-(package! org-roam-server)
 (package! wordnut)
 (package! color-theme-sanityinc-tomorrow)
 ;; (package! vertico)
@@ -68,3 +63,6 @@
 (package! consult)
 (package! vue-mode)
 (package! prettier)
+(package! lsp-tailwindcss)
+(package! websocket)
+(package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
