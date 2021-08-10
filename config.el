@@ -19,13 +19,13 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
- (setq doom-font (font-spec :family "Iosevka SS04" :size 19 :weight 'regular)
-       doom-variable-pitch-font (font-spec :family "Iosevka Etoile" :size 24))
+ (setq doom-font (font-spec :family "Iosevka SS04" :size 21 :weight 'regular)
+       doom-variable-pitch-font (font-spec :family "Iosevka Sparkle" :size 1.5))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `wdoom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-Iosvkem)
+(setq doom-theme 'doom-badger)
 
 ;; Global settings
 ;; Set environment variables
@@ -43,7 +43,7 @@
 ;; (add-load-path! "../.emacs.d/")
 ;; Set default frame dimensions
 (add-to-list 'default-frame-alist '(height . 32))
-(add-to-list 'default-frame-alist '(width . 118))
+(add-to-list 'default-frame-alist '(width . 110))
 
 ;; Global keybindings
 ;; Emacs native
@@ -60,7 +60,6 @@
 (map! :leader "f r" #'crux-recentf-find-file)
 (map! :leader "," #'consult-buffer)
 (map! :leader "." #'+ivy/switch-workspace-buffer)
-
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -148,6 +147,15 @@
 (setq org-ellipsis " › ")
 (setq org-global-refile-targets '(((org-path "emacs.org") :maxlevel . 1)
                                   ((org-path "gtd.org"):maxlevel . 2)))
+
+;; (add-hook 'org-capture-mode-hook (lambda ()
+;;                                    (if (equal "emacs-capture" (frame-parameter nil 'name))
+;;                                        (raise-frame))))
+
+;; (add-hook 'org-capture-after-finalize-hook (lambda ()
+;;   (if (equal "emacs-capture" (frame-parameter nil 'name))
+;;       (delete-frame))))
+
 (after! org
   (setq org-agenda-files `(,(org-path "inbox.org")
                            ,(org-path "gtd.org"))
@@ -233,10 +241,14 @@
     (?+ . ?➤)
     (?- . ?»)))
 ;; LaTeX export configuration
-(setq org-latex-compiler "xelatex"
-      org-latex-pdf-process (list (concat "latexmk -"
-                                          org-latex-compiler
-                                          " -recorder -synctex=1 -bibtex -bibtex-cond %b")))
+;; (setq org-latex-compiler "xelatex"
+;;       org-latex-pdf-process (list (concat "latexmk -"
+;;                                           org-latex-compiler
+;;                                           " -recorder -synctex=1 -bibtex -bibtex-cond %b")))
+(setq org-latex-pdf-process
+    '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
+
+
 (setq org-latex-default-packages-alist
       '(("" "graphicx" t)
         ("" "grffile" t)
@@ -269,7 +281,7 @@
       org-roam-db-update-method 'immediate
       org-roam-tag-sources '(prop last-directory)
       +org-roam-open-buffer-on-find-file nil)
-(org-roam-setup)
+(after! org-roam (org-roam-setup))
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
 ;; Custom functions
