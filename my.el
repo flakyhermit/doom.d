@@ -74,3 +74,20 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
 
 (global-set-key (kbd "C-c j s") #'my-journal-daily)
 (map! :leader "p n" #'my-new-project)
+
+;; org-mode enhancements ---------
+(defun my-org-roam-copy-text ()
+  "Copy the text content of a roam note in the current buffer"
+  (interactive)
+  ;; Check if buffer has a roam note
+  (when (string=
+         (file-name-directory (buffer-file-name))
+         (concat org-roam-directory "/"))
+    (save-excursion
+      (goto-char (point-min))
+      (if (re-search-forward "^-----" nil t)
+          (progn
+            (forward-line 1)
+            (kill-ring-save (point) (point-max))
+            (message "Text copied to clipboard"))
+        (message "Incorrectly formatted file")))))
