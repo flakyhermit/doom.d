@@ -277,8 +277,7 @@
                                    :unnarrowed t))
       org-roam-capture-ref-templates (list (nth 1 org-roam-capture-templates)))
 
-(setq org-roam-buffer-position 'right
-      org-roam-db-update-method 'immediate
+(setq org-roam-db-update-method 'immediate
       org-roam-tag-sources '(prop last-directory)
       +org-roam-open-buffer-on-find-file nil)
 (after! org-roam (org-roam-setup))
