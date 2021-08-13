@@ -128,8 +128,14 @@
   ("p" (lambda () (evil-previous-line 3)))
   ("gg" evil-goto-first-line)
   ("G" evil-goto-line))
+(defhydra hydra-frame-size ()
+  "frame size"
+  ("n" (lambda () (interactive) (set-frame-size (selected-frame) 110 32)))
+  ("c" (lambda () (interactive) (set-frame-size (selected-frame) 45 25)))
+  ("w" (lambda () (interactive) (set-frame-size (selected-frame) 160 32))))
 (define-key evil-motion-state-map (kbd "M-u") 'hydra-move/body)
 (define-key evil-motion-state-map (kbd "M-w") '+hydra/window-nav/body)
+(define-key evil-motion-state-map (kbd "M-f") 'hydra-frame-size/body)
 ;; (map! :leader "w" #'+hydra/window-nav/body)
 
 ;; projectile ----------------
