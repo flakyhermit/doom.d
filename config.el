@@ -130,9 +130,10 @@
   ("G" evil-goto-line))
 (defhydra hydra-frame-size ()
   "frame size"
-  ("n" (lambda () (interactive) (set-frame-size (selected-frame) 110 32)))
-  ("c" (lambda () (interactive) (set-frame-size (selected-frame) 45 25)))
-  ("w" (lambda () (interactive) (set-frame-size (selected-frame) 160 32))))
+  ("1" (lambda () (interactive) (set-frame-size (selected-frame) 110 32)) "normal")
+  ("2" (lambda () (interactive) (set-frame-size (selected-frame) 160 32)) "wide")
+  ("3" (lambda () (interactive) (set-frame-size (selected-frame) 45 25)) "clipper"))
+>>>>>>> 8703f63 (Changed keybinding)
 (define-key evil-motion-state-map (kbd "M-u") 'hydra-move/body)
 (define-key evil-motion-state-map (kbd "M-w") '+hydra/window-nav/body)
 (define-key evil-motion-state-map (kbd "M-f") 'hydra-frame-size/body)
