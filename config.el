@@ -49,6 +49,7 @@
 ;; Emacs native
 (global-set-key (kbd "C-x p") #'mark-paragraph)
 (map! :leader "f f"  #'find-file)
+(map! :leader "f F"  #'find-file-other-window)
 (map! "C-x k" #'kill-this-buffer)
 (map! :leader "k" #'kill-this-buffer)
 (map! :leader "P" #'projectile-find-file)
