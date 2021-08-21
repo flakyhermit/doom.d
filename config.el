@@ -272,6 +272,7 @@
 ;; There's a local `org-latex-classes' set in .dir-locals.el in the org-directory
 
 ;; org-roam ------------------
+(setq org-roam-v2-ack t)
 (setq org-roam-directory (org-path "knowledgebase")
       org-roam-capture-templates `(("d" "default"
                                     plain "\nLabels: %?"
