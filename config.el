@@ -294,14 +294,13 @@
 (add-hook 'org-mode-hook #'prose-mode)
 ;; Custom functions
 (defun org-roam-switch-db ()
-  "Switch between multiple org-roam knowledgebases"
+  "Switch between multiple org-roam knowledgebases."
   (interactive)
-  (unless org-roam-mode (org-roam-mode))
-  (let ((org-roam-directory-list '("~/Dropbox/Notes/org/journal" "~/Dropbox/Notes/org/knowledgebase")))
-    (cd (completing-read "Pick database: " org-roam-directory-list))
-    (find-file "index.org")
-    (org-roam-db-build-cache)
-    (org-roam-find-file)))
+  (let ((org-roam-directory-list '("~/Dropbox/Notes/org/journal" "~/Dropbox/Notes/org/personal"  "~/Dropbox/Notes/org/knowledgebase")))
+    (setq org-roam-directory (completing-read "Pick database: " org-roam-directory-list))
+    (setq org-roam-db-location (expand-file-name "org-roam.db" org-roam-directory))
+    (org-roam-db-sync)
+    (org-roam-node-find)))
 (defun org-roam-capture-ref ()
   (interactive)
   (org-roam-capture nil "r"))
