@@ -27,6 +27,7 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-badger)
 
+(setq doom-modeline-icon nil)
 ;; Global settings
 ;; Set environment variables
 (setenv "DROPBOX" "~/Dropbox")
