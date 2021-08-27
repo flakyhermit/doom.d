@@ -91,3 +91,19 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
             (kill-ring-save (point) (point-max))
             (message "Text copied to clipboard"))
         (message "Incorrectly formatted file")))))
+
+(defun my-find-file-in-notes ()
+  "Emacs find-file in the org directory."
+  (interactive)
+  (let ((default-directory org-directory))
+    (call-interactively #'find-file)))
+
+(defun my-find-org-note ()
+  "Find a note in the org directory root."
+  (interactive)
+  (find-file
+   (read-file-name "Org file: " org-directory "gtd.org" t nil
+                   (lambda (filename)
+                     (when (string-match-p ".org$" filename) t)))))
+
+(map! :leader "n f" #'my-find-org-note)
