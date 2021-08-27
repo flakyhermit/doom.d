@@ -243,11 +243,12 @@
   '(term :size 15))
 ;; (doom-themes-set-faces nil
 ;;   '(org-document-title :weight 'bold))
-(setq org-superstar-headline-bullets-list "ᗒ")
+;; Superstar bullets: ᐅ ✵ ✱ ➭
+(setq org-superstar-headline-bullets-list "➭")
 (setq org-superstar-item-bullet-alist
-  '((?* . ?-)
-    (?+ . ?➤)
-    (?- . ?»)))
+  '((?* . ?ᐳ)
+    (?+ . ?ᐅ )
+    (?- . ?ᐉ)))
 ;; LaTeX export configuration
 ;; (setq org-latex-compiler "xelatex"
 ;;       org-latex-pdf-process (list (concat "latexmk -"
@@ -289,7 +290,7 @@
 (setq org-roam-db-update-method 'immediate
       org-roam-tag-sources '(prop last-directory)
       +org-roam-open-buffer-on-find-file nil)
-(after! org-roam (org-roam-setup))
+(after! org-roam (org-roam-db-autosync-mode))
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
 ;; Custom functions
