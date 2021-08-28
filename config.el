@@ -199,11 +199,8 @@
            (file+olp+datetree ,(org-path "blog.org") "Journal")
            "* %?\n")
           ("g" "Today's gratitude journal" item
-           (file+datetree ,(org-path "gratitude.org"))
+           (file+olp+datetree ,(org-path "gratitude.org"))
            "- %?\n")
-          ("b" "Add a BLOG journal entry" entry
-           (file+olp+datetree ,(org-path "blog.org") "Journal")
-           "* %?\n")
           ("p" "A project IDEA" entry
            (file+headline ,(org-path "projects.org") "Ideas")
            "* %?\n")
