@@ -59,7 +59,7 @@
 (map! :leader "a" #'evil-switch-to-windows-last-buffer)
 (map! :leader "l" #'projectile-find-file)
 (map! :leader "f x" #'crux-open-with)
-(map! :leader "f r" #'crux-recentf-find-file)
+(map! :leader "f r" #'counsel-recentf)
 (map! :leader "," #'consult-buffer)
 (map! :leader "." #'+ivy/switch-workspace-buffer)
 
