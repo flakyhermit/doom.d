@@ -146,6 +146,25 @@
 ;; magit ---------------------
 (map! :leader "g c a" #'magit-commit-amend)
 
+;; emacs-anywhere stuff ------
+;; Install `emacs-anywhere' with:
+;; curl -fsSL https://raw.github.com/zachcurry/emacs-anywhere/master/install | bash
+;; and set a keybinding
+(defun popup-handler (app-name window-title x y w h)
+  "Handle emacs-anywhere popup."
+  (let ((width 850)
+        (height 500))
+    (set-frame-size (selected-frame) width height t)
+    ;; Position the frame in the middle at the bottom
+    (set-frame-position
+     (selected-frame)
+     (- (/ (x-display-pixel-width) 2)
+        (/ width 2))
+     (- (x-display-pixel-height)
+        height))))
+;; Hook your handler
+(add-hook 'ea-popup-hook 'popup-handler)
+
 ;; org -----------------------
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
