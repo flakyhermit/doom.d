@@ -120,6 +120,19 @@
 ;; hydra ---------------------
 ;; (defhydra+ +hydra/window-nav ()
 ;; ("w" other-window))
+;; Utilities before we move on to the hydras
+(defun my-window-bottom-float ()
+  (interactive)
+  (let ((width 900)
+        (height 500))
+    (set-frame-size (selected-frame) width height t)
+    ;; Position the frame in the middle at the bottom
+    (set-frame-position
+     (selected-frame)
+     (- (/ (x-display-pixel-width) 2)
+        (/ width 2))
+     (- (x-display-pixel-height)
+        height))))
 (defhydra hydra-move ()
   "scroll"
   ("u" evil-scroll-up)
@@ -134,6 +147,7 @@
   "frame size"
   ("1" (lambda () (interactive) (set-frame-size (selected-frame) 110 32)) "normal")
   ("2" (lambda () (interactive) (set-frame-size (selected-frame) 160 32)) "wide")
+  ("4" #'my-window-bottom-float "bottom float")
   ("3" (lambda () (interactive) (set-frame-size (selected-frame) 45 25)) "clipper"))
 (define-key evil-motion-state-map (kbd "M-u") 'hydra-move/body)
 (define-key evil-motion-state-map (kbd "M-w") '+hydra/window-nav/body)
@@ -152,16 +166,7 @@
 ;; and set a keybinding
 (defun popup-handler (app-name window-title x y w h)
   "Handle emacs-anywhere popup."
-  (let ((width 850)
-        (height 500))
-    (set-frame-size (selected-frame) width height t)
-    ;; Position the frame in the middle at the bottom
-    (set-frame-position
-     (selected-frame)
-     (- (/ (x-display-pixel-width) 2)
-        (/ width 2))
-     (- (x-display-pixel-height)
-        height))))
+  (my-window-bottom-float))
 ;; Hook your handler
 (add-hook 'ea-popup-hook 'popup-handler)
 
