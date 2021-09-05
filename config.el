@@ -74,7 +74,7 @@
 ;; Facilitate local wordnut lookup
 (setq +lookup-dictionary-prefer-offline t)
 (set-popup-rule! "^\\*" :height 0.4)
-(set-popup-rule! "^\\*WordNut*" :height 0.2)
+(set-popup-rule! "^\\*WordNut*" :height 0.3)
 
 ;; File operations
 (setq delete-by-moving-to-trash t)
