@@ -107,3 +107,15 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
                      (when (string-match-p ".org$" filename) t)))))
 
 (map! :leader "n f" #'my-find-org-note)
+
+;; Utility functions for text manipulation
+(defun my-util-format-comma-space ()
+  (interactive)
+  (save-excursion
+    (let ((beg (region-beginning))
+          (end (region-end)))
+    (goto-char beg)
+    (while (re-search-forward ",[^ ]" end)
+      (goto-char (+ 1 (match-beginning 0)))
+      (insert " ")
+      (setq end (+ 1 end))))))
