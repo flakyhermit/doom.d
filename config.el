@@ -238,6 +238,9 @@
           ("ed" "A DOOM EMACS tip or customizaiton idea" entry
            (file+olp+datetree ,(org-path "emacs/doom.org"))
            "* %?\n")
+          ("el" "New Emacs Lisp fact" entry
+           (file+headline ,(org-path "emacs/emacs.org") "Emacs Lisp")
+           "* %? \n\n")
           ("ee" "An Emacs customization idea" entry
            (file+headline ,(org-path "emacs/emacs.org") "To-do")
            "* TODO %? \n\n")
