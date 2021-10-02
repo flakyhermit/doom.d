@@ -268,11 +268,11 @@
 ;; (doom-themes-set-faces nil
 ;;   '(org-document-title :weight 'bold))
 ;; Superstar bullets: ᐅ ✵ ✱ ➭
-(setq org-superstar-headline-bullets-list "➭")
+(setq org-superstar-headline-bullets-list "⁕")
 (setq org-superstar-item-bullet-alist
-  '((?* . ?ᐳ)
-    (?+ . ?ᐅ )
-    (?- . ?ᐉ)))
+  '((?* . ?‣)
+    (?+ . ?‣ )
+    (?- . ?‣)))
 ;; LaTeX export configuration
 ;; (setq org-latex-compiler "xelatex"
 ;;       org-latex-pdf-process (list (concat "latexmk -"
@@ -295,6 +295,10 @@
         ("" "capt-of" nil)
         ("" "hyperref" nil)))
 ;; There's a local `org-latex-classes' set in .dir-locals.el in the org-directory
+;; Extras
+;; Zero-width spaces
+(define-key org-mode-map (kbd "M-SPC M-SPC")
+  (lambda () (interactive) (insert "\u200b")))
 
 ;; org-roam ------------------
 (setq org-roam-v2-ack t)
@@ -443,6 +447,10 @@
 
 ;; Custom loads
 (load! "my.el")
+(add-load-path! "my-packages")
+(setq my-package-list '(joplin-api-calls org-kindle-clippings))
+(mapc (lambda (package)
+        (require package)) my-package-list)
 ;; Custom faces
 ;; (custom-theme-set-faces 'doom-Iosvkem ())
 
