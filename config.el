@@ -308,10 +308,10 @@
     ;; Get all tags in the current buffer
     (org-map-entries
      (lambda ()
-       (let ((tag-string (car (last (org-heading-components)))))
-         (when tag-string
+       (let ((tag-list (org-get-tags)))
+         (when tag-list
            (setq all-tags
-                 (append all-tags (split-string tag-string ":" t)))))))
+                 (append all-tags tag-list))))))
     (delete-dups all-tags)
     (setq to-delete (completing-read "Select tag: " all-tags))
     ;; Remove selected tag
