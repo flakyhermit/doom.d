@@ -302,9 +302,10 @@
     (lambda () (interactive) (insert "\u200b"))))
 
 (defun my-org-tag-delete-all ()
-  "Delete the specified tag from all entries."
+  "Delete the selected tag from all entries."
   (interactive)
   (let ((all-tags) (to-delete))
+    ;; Get all tags in the current buffer
     (org-map-entries
      (lambda ()
        (let ((tag-string (car (last (org-heading-components)))))
@@ -313,17 +314,10 @@
                  (append all-tags (split-string tag-string ":" t)))))))
     (delete-dups all-tags)
     (setq to-delete (completing-read "Select tag: " all-tags))
-    (message "TD: %S" to-delete)
+    ;; Remove selected tag
     (org-map-entries
      (lambda ()
-       (let ((current-tags (org-get-tags)))
-         ;; Check if tag in list, remove from list
-         (when current-tags
-           (when (member to-delete current-tags)
-             (setq current-tags (delete to-delete current-tags)))
-           ;; org-set-tags
-           (org-set-tags current-tags)
-         ))))))
+       (org-toggle-tag to-delete 'off)) to-delete)))
 
 ;; org-roam ------------------
 (setq org-roam-v2-ack t)
