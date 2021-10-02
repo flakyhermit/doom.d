@@ -297,8 +297,33 @@
 ;; There's a local `org-latex-classes' set in .dir-locals.el in the org-directory
 ;; Extras
 ;; Zero-width spaces
-(define-key org-mode-map (kbd "M-SPC M-SPC")
-  (lambda () (interactive) (insert "\u200b")))
+(after! org
+  (define-key org-mode-map (kbd "M-SPC M-SPC")
+    (lambda () (interactive) (insert "\u200b"))))
+
+(defun my-org-tag-delete-all ()
+  "Delete the specified tag from all entries."
+  (interactive)
+  (let ((all-tags) (to-delete))
+    (org-map-entries
+     (lambda ()
+       (let ((tag-string (car (last (org-heading-components)))))
+         (when tag-string
+           (setq all-tags
+                 (append all-tags (split-string tag-string ":" t)))))))
+    (delete-dups all-tags)
+    (setq to-delete (completing-read "Select tag: " all-tags))
+    (message "TD: %S" to-delete)
+    (org-map-entries
+     (lambda ()
+       (let ((current-tags (org-get-tags)))
+         ;; Check if tag in list, remove from list
+         (when current-tags
+           (when (member to-delete current-tags)
+             (setq current-tags (delete to-delete current-tags)))
+           ;; org-set-tags
+           (org-set-tags current-tags)
+         ))))))
 
 ;; org-roam ------------------
 (setq org-roam-v2-ack t)
