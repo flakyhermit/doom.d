@@ -82,6 +82,8 @@
 (setq make-backup-files t)
 ;; Encryption key
 (setq epa-file-encrypt-to '("754A49D9075B89B3"))
+;; Dired settings
+(add-to-list 'dired-mode-hook (lambda () (dired-hide-details-mode t)))
 
 ;; Major mode configurations
 ;; evil ---------------------
