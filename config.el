@@ -438,6 +438,13 @@
       org-ref-default-bibliography (expand-file-name "references.bib" org-ref-notes-directory)
       org-ref-pdf-directory "~/Dropbox/Zotero/") ;; TODO Not required now. Fix this later.
 
+;; ox-hugo --------------------
+(after! org
+  (require 'ox-hugo)
+  (setq org-hugo-base-dir "~/Dropbox/Projects/jeweljames"
+        org-hugo-default-section-directory "brain")
+  (citeproc-org-setup))
+
 ;; helm-bibtex ----------------
 (setq bibtex-completion-pdf-field "file"
       bibtex-completion-bibliography org-ref-default-bibliography
