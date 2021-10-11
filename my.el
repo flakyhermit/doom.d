@@ -69,7 +69,7 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
     (message filename)))
 
 ;; Configuration
-(setq journal-directory (concat (getenv "DROPBOX") "/Notes/6_PMs"))
+(setq journal-directory (concat (getenv "DROPBOX") "/Notes/journal"))
 (setq project-directory (expand-file-name "Projects" (getenv "HOME")))
 
 (global-set-key (kbd "C-c j s") #'my-journal-daily)
