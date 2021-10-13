@@ -194,8 +194,11 @@
   (setq org-agenda-files `(,(org-path "inbox.org")
                            ,(org-path "gtd.org"))
         org-agenda-span 'week
-        org-agenda-custom-commands '(("r" "Stuff to add to ROAM" tags-todo "roam")
-                                     ("A" "Add to anki" tags-todo "anki")))
+        org-agenda-custom-commands `(("r" "Stuff to add to ROAM" tags-todo "roam")
+                                     ("A" "Add to anki" tags-todo "anki")
+                                     ;; Sparse trees
+                                     ("a" "Added this year" tags-tree
+                                      ,(format "ADDED={%s}" (format-time-string "%Y")))))
 
   (setq org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
         org-refile-targets org-global-refile-targets
