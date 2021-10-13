@@ -179,8 +179,8 @@
 (defmacro org-path (filename)
     (expand-file-name filename org-directory))
 (setq org-ellipsis " › ")
-(setq org-global-refile-targets '(((org-path "emacs.org") :maxlevel . 1)
-                                  ((org-path "gtd.org"):maxlevel . 2)))
+(setq org-global-refile-targets `((,(org-path "emacs.org") :maxlevel . 1)
+                                  (,(org-path "gtd.org"):maxlevel . 2)))
 
 ;; (add-hook 'org-capture-mode-hook (lambda ()
 ;;                                    (if (equal "emacs-capture" (frame-parameter nil 'name))
