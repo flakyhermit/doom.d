@@ -230,9 +230,9 @@
           ("p" "A project IDEA" entry
            (file+headline ,(org-path "projects.org") "Ideas")
            "* %?\n")
-          ("B" "Add a BOOK to the 'considering' list" entry
-           (file+olp ,(org-path "lists/books.org") "Considering")
-           "* <book%?\n")
+          ("B" "Add a BOOK to my shelf" entry
+           (file+olp ,(org-path "books.org") "Considering")
+           "* CONS %^{Title} - %(oc-store-var \"Author\" 'author)\n:PROPERTIES:\n:Added:    %u\n:Author:   %(progn author)\n:END:\n %?\n")
           ("r" "Add an ARTICLE to read later" checkitem
            (file+olp+datetree ,(org-path "lists/read-later.org"))
            "- [ ] %:annotation %?\n")
