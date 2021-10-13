@@ -191,8 +191,7 @@
 ;;       (delete-frame))))
 
 (after! org
-  (setq org-agenda-files `(,(org-path "inbox.org")
-                           ,(org-path "gtd.org"))
+  (setq org-agenda-files `(,(org-path "gtd.org"))
         org-agenda-span 'week
         org-agenda-custom-commands `(("r" "Stuff to add to ROAM" tags-todo "roam")
                                      ("A" "Add to anki" tags-todo "anki")
