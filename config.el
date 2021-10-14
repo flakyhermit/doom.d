@@ -95,6 +95,7 @@
 (after! ivy
   (setq ivy-use-selectable-prompt t
         ivy-height 12)
+  (counsel-mode 1)
   (amx-mode 1))
 
 ;; vertico ------------------
