@@ -132,7 +132,7 @@
 ;; (defhydra+ +hydra/window-nav ()
 ;; ("w" other-window))
 ;; Utilities before we move on to the hydras
-(defun my-window-bottom-float ()
+(defun +window-bottom-float ()
   (interactive)
   (let ((width 900)
         (height 500))
@@ -158,7 +158,7 @@
   "frame size"
   ("1" (lambda () (interactive) (set-frame-size (selected-frame) 110 32)) "normal")
   ("2" (lambda () (interactive) (set-frame-size (selected-frame) 160 32)) "wide")
-  ("4" #'my-window-bottom-float "bottom float")
+  ("4" #'+window-bottom-float "bottom float")
   ("3" (lambda () (interactive) (set-frame-size (selected-frame) 45 25)) "clipper"))
 (define-key evil-motion-state-map (kbd "M-u") 'hydra-move/body)
 (define-key evil-motion-state-map (kbd "M-w") '+hydra/window-nav/body)
@@ -269,7 +269,7 @@
 (map! :map mode-specific-map "a" #'org-agenda)
 (map! :map mode-specific-map "c" #'counsel-org-capture)
 (add-to-list 'org-modules 'org-habit)
-(defun org-refile-global ()
+(defun +org-refile-global ()
   "Refile to the global refile target list"
   (interactive)
   (let ((org-refile-targets org-global-refile-targets))
@@ -314,7 +314,7 @@
   (define-key org-mode-map (kbd "M-SPC M-SPC")
     (lambda () (interactive) (insert "\u200b"))))
 
-(defun my-org-tag-delete-all ()
+(defun +org-tag-delete-all ()
   "Delete the selected tag from all entries."
   (interactive)
   (let ((all-tags) (to-delete))
@@ -354,7 +354,7 @@
 (add-hook! org-roam-mode #'org-roam-bibtex-mode)
 (add-hook 'org-mode-hook #'prose-mode)
 ;; Custom functions
-(defun org-roam-switch-db ()
+(defun +org-roam-switch-db ()
   "Switch between multiple org-roam knowledgebases."
   (interactive)
   (let ((org-roam-directory-list '("~/Dropbox/Notes/org/journal" "~/Dropbox/Notes/org/personal"  "~/Dropbox/Notes/org/knowledgebase")))
@@ -362,7 +362,7 @@
     (setq org-roam-db-location (expand-file-name "org-roam.db" org-roam-directory))
     (org-roam-db-sync)
     (org-roam-node-find)))
-(defun org-roam-capture-ref ()
+(defun +org-roam-capture-ref ()
   (interactive)
   (org-roam-capture nil "r"))
 ;; Misc
