@@ -84,6 +84,14 @@
 (setq epa-file-encrypt-to '("754A49D9075B89B3"))
 ;; Dired settings
 (add-to-list 'dired-mode-hook (lambda () (dired-hide-details-mode t)))
+;; Dired extras
+(defun +dired-copy-file-content ()
+  "Copy the contents of the (text) file at point to clipboard."
+  (interactive)
+  (let ((buf  (find-file-noselect (dired-get-file-for-visit))))
+    (with-current-buffer buf
+      (kill-new (buffer-substring-no-properties (point-min) (point-max))))
+    (kill-buffer buf)))
 
 ;; Major mode configurations
 ;; evil ---------------------
