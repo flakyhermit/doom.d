@@ -177,7 +177,7 @@
 ;; and set a keybinding
 (defun popup-handler (app-name window-title x y w h)
   "Handle emacs-anywhere popup."
-  (my-window-bottom-float))
+  (+window-bottom-float))
 ;; Hook your handler
 (add-hook 'ea-popup-hook 'popup-handler)
 
