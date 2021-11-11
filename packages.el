@@ -66,4 +66,5 @@
 (package! org-roam-bibtex
   :recipe (:branch "org-roam-v2"))
 (package! ox-hugo)
+(package! org-appear)
 (package! citeproc-org)
