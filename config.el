@@ -475,9 +475,9 @@
 
 ;; Minor modes
 ;; olivetti
-(setq olivetti-body-width 120)
-(map! :leader :desc "Olivetti mode" "t o"  #'olivetti-mode)
-(add-hook 'olivetti-mode-hook (lambda () (hide-mode-line-mode 'toggle)))
+;; (setq olivetti-body-width 120)
+;; (map! :leader :desc "Olivetti mode" "t o"  #'olivetti-mode)
+;; (add-hook 'olivetti-mode-hook (lambda () (hide-mode-line-mode 'toggle)))
 ;; yasnippets
 (add-to-list 'yas-snippet-dirs (expand-file-name "snippets" (doom-dir)))
 (require 'warnings)
