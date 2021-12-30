@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `wdoom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-palenight)
+(setq doom-theme 'doom-spacegrey)
 
 (setq doom-modeline-icon nil)
 ;; Global settings
@@ -60,8 +60,8 @@
 (map! :leader "l" #'projectile-find-file)
 (map! :leader "f x" #'crux-open-with)
 (map! :leader "f r" #'counsel-recentf)
-(map! :leader "," #'consult-buffer)
-(map! :leader "." #'+ivy/switch-workspace-buffer)
+(map! :leader "." #'consult-buffer)
+(map! :leader "," #'+ivy/switch-workspace-buffer)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -200,12 +200,19 @@
 ;;       (delete-frame))))
 
 (after! org
-  (setq org-agenda-files `(,(org-path "gtd.org"))
+  (setq org-agenda-files `(,(org-path "gtd.org") ,(org-path "work.org"))
         org-agenda-span 'week
         org-agenda-custom-commands `(("r" "Stuff to add to ROAM" tags-todo "roam")
                                      ("A" "Add to anki" tags-todo "anki")
                                      ;; Sparse trees
-                                     ("a" "Added this year" tags-tree
+                                     ("d" . "Added/closed at")
+                                     ("dt" "Added this month" occur-tree
+                                      ,(format "- Added at \\[%s" (format-time-string "%Y-%m")))
+                                     ("dc" "Closed this year" tags-tree
+                                      "CLOSED>\"<-1m>\"")
+                                     ("dY" "Added last year" tags-tree
+                                      ,(format "ADDED={%d}" (- (string-to-number (format-time-string "%Y")) 1)))
+                                     ("dy" "Added this year" tags-tree
                                       ,(format "ADDED={%s}" (format-time-string "%Y")))))
 
   (setq org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
@@ -229,6 +236,9 @@
           ("Q" "A QUOTE" entry
            (file ,(org-path "quotes.org"))
            "* %?\n\n")
+          ("m" "New music" entry
+           (file+headline ,(org-path "listen.org") "Music")
+           "* %?\n:LOGBOOK:\n- Added at %U\n:END:")
           ("i" "Add a BLOG post IDEA" entry
            (file+headline ,(org-path "blog.org") "Posts")
            "* %?\nCaptured On: %U")
@@ -243,7 +253,7 @@
            "* %?\n")
           ("B" "Add a BOOK to my shelf" entry
            (file+olp ,(org-path "books.org") "Considering")
-           "* CONS %^{Title} - %(oc-store-var \"Author\" 'author)\n:PROPERTIES:\n:Added:    %u\n:Author:   %(progn author)\n:END:\n %?\n")
+           "* CONS %^{Title} - %(oc-store-var \"Author\" 'author)\n:PROPERTIES:\n:Author:   %(progn author)\n:END:\n:LOGBOOK:\n- Added on %u\n:END:\n %?\n")
           ("r" "Add an ARTICLE to read later" checkitem
            (file+olp+datetree ,(org-path "lists/read-later.org"))
            "- [ ] %:annotation %?\n")
@@ -279,6 +289,13 @@
 (add-hook! org-capture-mode #'yas-expand)
 (doom-themes-set-faces nil
   '(term :size 15))
+
+(defvar oc-capture-prmt-history nil
+  "History of prompt answers for org capture.")
+(defun oc-store-var (prompt variable)
+  "PROMPT for string, save it to VARIABLE and insert it."
+  (make-local-variable variable)
+  (set variable (read-string (concat prompt ": ") nil oc-capture-prmt-history)))
 ;; (doom-themes-set-faces nil
 ;;   '(org-document-title :weight 'bold))
 ;; Superstar bullets: ᐅ ✵ ✱ ➭
@@ -408,8 +425,6 @@
           org-roam-ui-open-on-start t))
 ;; markdown-mode --------------
 (add-hook 'markdown-mode-hook #'prose-mode)
-(doom-themes-set-faces nil
-  '(markdown-header-face-1 :height 150 :inherit 'markdown-header-face))
 ;; (setq markdown-command "pandoc -t html --css ~/.emacs.d/mdhtmlstyle.css input.md -o output.pdf")
 
 ;; mixed-pitch-mode ------------
