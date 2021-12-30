@@ -333,6 +333,13 @@
      (lambda ()
        (org-toggle-tag to-delete 'off)) to-delete)))
 
+;; For org-alert
+(after! org
+  (require 'org-alert)
+  (setq alert-default-style 'libnotify) ;; alert style to system notifs
+  (setq org-alert-notification-title "Org Agenda")
+  (org-alert-enable))
+
 ;; org-roam ------------------
 (setq org-roam-v2-ack t)
 (setq org-roam-directory (org-path "knowledgebase")

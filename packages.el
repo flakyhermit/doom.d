@@ -68,3 +68,5 @@
 (package! ox-hugo)
 (package! org-appear)
 (package! citeproc-org)
+(package! elfeed)
+(package! org-alert)
