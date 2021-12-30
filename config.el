@@ -295,6 +295,7 @@
 (setq org-latex-pdf-process
     '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
 
+(setq org-noter-notes-window-location 'other-frame)
 
 (setq org-latex-default-packages-alist
       '(("" "graphicx" t)
