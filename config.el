@@ -287,6 +287,18 @@
     (org-refile)))
 (map! "C-c 0 C-w" #'org-refile-global)
 (add-hook! org-capture-mode #'yas-expand)
+
+;; org faces
+(custom-set-faces!
+ '(org-quote :font "Literata" :height 110 :weight semibold :slant italic)
+ '(org-document-title :font "Literata" :slant italic :height 180 :weight semibold)
+ '(outline-1 :font "Helvetica" :height 110 :weight bold)
+ '(org-todo :height 110)
+ '(org-done :height 110)
+ '(org-tag :height 110)
+ '(outline-2 :font "Helvetica" :height 110 :weight semibold)
+ '(outline-3 :font "Helvetica" :height 110 :weight semibold)
+ '(outline-4 :font "Helvetica" :height 110 :weight semibold))
 (doom-themes-set-faces nil
   '(term :size 15))
 
@@ -455,11 +467,6 @@
       (set-window-buffer nil (window-buffer)))))
 
 ;; org-roam-bibtex ------------
-(setq orb-templates
-  '(("r" "ref" plain (function org-roam-capture--get-point) ""
-     :file-name "references/%<%Y%m%d%H%M%S>-${citekey}"
-     :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_tags: ref\n#+created: %U\n\n* ${title}\n%?"
-     :unnarrowed t)))
 (define-key mode-specific-map (kbd "n a") 'orb-note-actions)
 (define-key mode-specific-map (kbd "n f") 'orb-find-non-ref-file)
 ;; (map! :leader "r F" #'orb-find-non-ref-file)

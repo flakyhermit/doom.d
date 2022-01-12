@@ -63,8 +63,7 @@
 (package! prettier)
 (package! websocket)
 (package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
-(package! org-roam-bibtex
-  :recipe (:branch "org-roam-v2"))
+(package! org-roam-bibtex)
 (package! ox-hugo)
 (package! org-appear)
 (package! citeproc-org)
