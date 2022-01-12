@@ -459,7 +459,7 @@
       (progn
         (display-line-numbers-mode -1)
         (mixed-pitch-mode 1)
-        (setq line-spacing 4)
+        (setq line-spacing 8)
         (setq left-margin-width 2)
         (set-window-buffer nil (window-buffer)))
     (progn
