@@ -63,7 +63,7 @@
 (map! :leader "f x" #'crux-open-with)
 (map! :leader "f r" #'counsel-recentf)
 (map! :leader "." #'consult-buffer)
-(map! :leader "," #'+ivy/switch-workspace-buffer)
+(map! :leader "SPC" #'+ivy/switch-workspace-buffer)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
