@@ -28,6 +28,8 @@
 (setq doom-theme 'doom-spacegrey)
 
 (setq doom-modeline-icon nil)
+(custom-set-faces!
+  '(doom-modeline-buffer-modified :foreground "orange"))
 ;; Global settings
 ;; Set environment variables
 (setenv "DROPBOX" "~/Dropbox")
