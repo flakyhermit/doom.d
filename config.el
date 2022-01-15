@@ -244,6 +244,9 @@
           ("i" "Add a BLOG post IDEA" entry
            (file+headline ,(org-path "blog.org") "Posts")
            "* %?\nCaptured On: %U")
+          ("M" "Mental health" entry
+           (file+headline ,(org-path "health.org") "Mental health")
+          "* %?\nCaptured On: %U")
           ("b" "Add a BLOG journal entry" entry
            (file+olp+datetree ,(org-path "blog.org") "Journal")
            "* %?\n")
