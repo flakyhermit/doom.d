@@ -26,9 +26,9 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
                               (expand-file-name dir))))
     (call-interactively #'find-file))))
 
-(defun my-journal-daily (title &optional arg)
-  "Create a 6PM journal entry using TITLE."
-  (interactive "M\Enter the title: \np")
+(defun my-journal-daily (&optional arg)
+  "Create a 6PM journal entry."
+  (interactive "p")
   (message "%d" arg)
   (let ((filename nil)
         (new-flag nil)
@@ -36,8 +36,7 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
                   (org-read-date nil 'to-time)
                 (encode-time (decode-time))))
         (timestring nil)
-        (title (with-syntax-table text-mode-syntax-table
-                 (capitalize title))))
+        (title ""))
     ;; Check if file already exists, assing if it does
     (setq timestring (format-time-string "%F" time))
     (setq filename
@@ -47,6 +46,9 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
     ;; If it doesn't,...
     (unless filename
       (setq new-flag t) ;; Set the flag
+      ;; read title
+      (setq title (with-syntax-table text-mode-syntax-table
+                    (capitalize (read-string "Enter the title: " nil nil ""))))
       ;; ...construct the new name
       (setq filename
             (concat
@@ -58,11 +60,12 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
     ;; Write data into file in the background
     (with-temp-file filepath
       (if new-flag
-          (insert "\n" (format-time-string "%A, %d %B %Y" time))
+          (progn
+            (insert "\n" (format-time-string "%A, %d %B %Y" time))
+            (goto-char (point-max))
+            (insert "\n# " title "\n\n"))
         (apply #'encode-time (decode-time))
-        (insert-file-contents filepath))
-      (goto-char (point-max))
-      (insert "\n# " title "\n\n"))
+        (insert-file-contents filepath)))
     ;; Open file in buffer
     (find-file filepath)
     (goto-char (point-max))
