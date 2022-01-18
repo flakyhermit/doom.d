@@ -53,7 +53,7 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
       (setq filename
             (concat
              timestring
-             "_"
+             (if (= (length title) 0) "" "_")
              (string-join (split-string (remove-punctuation title) " ") "_")
                       ".gpg")))
     (setq filepath (concat journal-directory "/" filename))
