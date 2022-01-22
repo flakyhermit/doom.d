@@ -296,7 +296,7 @@
 ;; org faces
 (custom-set-faces!
  '(org-quote :font "Literata" :height 110 :weight semibold :slant italic)
- '(org-document-title :font "Literata" :slant italic :height 180 :weight semibold)
+ '(org-document-title :font "Literata" :height 170 :slant italic :weight semibold)
  '(outline-1 :font "Helvetica" :height 110 :weight bold)
  '(org-todo :height 110)
  '(org-done :height 110)
