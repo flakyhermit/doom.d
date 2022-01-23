@@ -204,18 +204,18 @@
 (after! org
   (setq org-agenda-files `(,(org-path "gtd.org") ,(org-path "work.org"))
         org-agenda-span 'week
-        org-agenda-custom-commands `(("r" "Stuff to add to ROAM" tags-todo "roam")
-                                     ("A" "Add to anki" tags-todo "anki")
+        org-agenda-custom-commands `(("r" "Add to ROAM" tags-tree "roam")
+                                     ("A" "Add to anki" tags-tree "anki")
                                      ;; Sparse trees
-                                     ("d" . "Added/closed at")
-                                     ("dt" "Added this month" occur-tree
-                                      ,(format "- Added at \\[%s" (format-time-string "%Y-%m")))
-                                     ("dc" "Closed this year" tags-tree
-                                      "CLOSED>\"<-1m>\"")
-                                     ("dY" "Added last year" tags-tree
-                                      ,(format "ADDED={%d}" (- (string-to-number (format-time-string "%Y")) 1)))
-                                     ("dy" "Added this year" tags-tree
-                                      ,(format "ADDED={%s}" (format-time-string "%Y")))))
+                                     ("d" . "Closed at")
+                                     ("dy" "Read this year" tags-tree
+                                      ,(format "TODO=\"READ\"+CLOSED>=\"<%s-01-01>\"" (format-time-string "%Y")))
+                                     ("dl" "Read last year" tags-tree
+                                      ,(format "TODO=\"READ\"+CLOSED>=\"<%s-01-01>\"+CLOSED<=\"<%s-01-01>\""
+                                               (- (string-to-number (format-time-string "%Y")) 1)
+                                               (format-time-string "%Y")))
+                                     ("dm" "Closed in the last 30 days" tags-tree
+                                      "CLOSED>\"<-1m>\"")))
 
   (setq org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
         org-refile-targets org-global-refile-targets
