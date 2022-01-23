@@ -444,8 +444,8 @@
 (add-hook 'markdown-mode-hook #'prose-mode)
 ;; (setq markdown-command "pandoc -t html --css ~/.emacs.d/mdhtmlstyle.css input.md -o output.pdf")
 ;; markdown faces
-;; (custom-set-faces!
-;;  '(markdown-header-face :font "Eczar"))
+(custom-set-faces!
+ '(markdown-blockquote-face :font "Literata" :slant italic))
 
 ;; mixed-pitch-mode ------------
 (after! mixed-pitch
