@@ -207,14 +207,14 @@
         org-agenda-custom-commands `(("r" "Add to ROAM" tags-tree "roam")
                                      ("A" "Add to anki" tags-tree "anki")
                                      ;; Sparse trees
-                                     ("d" . "Closed at")
-                                     ("dy" "Read this year" tags-tree
+                                     ("d" . "Closed:")
+                                     ("dy" "This year" tags-tree
                                       ,(format "TODO=\"READ\"+CLOSED>=\"<%s-01-01>\"" (format-time-string "%Y")))
-                                     ("dl" "Read last year" tags-tree
+                                     ("dl" "Last year" tags-tree
                                       ,(format "TODO=\"READ\"+CLOSED>=\"<%s-01-01>\"+CLOSED<=\"<%s-01-01>\""
                                                (- (string-to-number (format-time-string "%Y")) 1)
                                                (format-time-string "%Y")))
-                                     ("dm" "Closed in the last 30 days" tags-tree
+                                     ("dm" "Last 30 days" tags-tree
                                       "CLOSED>\"<-1m>\"")))
 
   (setq org-todo-keywords '((sequence "TODO(t)" "ACTV(a!)" "|" "HOLD(h)" "CANC(c)" "DONE(d)"))
