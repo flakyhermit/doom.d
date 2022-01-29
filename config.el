@@ -238,6 +238,12 @@
           ("Q" "A QUOTE" entry
            (file ,(org-path "quotes.org"))
            "* %?\n\n")
+          ("T" "A Tumbleresque musing" entry
+           (file+headline ,(org-path "personal.org") "Posts")
+           "* %?\n\n")
+          ("u" "Unix customization ideas" entry
+           (file+headline ,(org-path "projects.org") "Linux")
+           "* %?\n\n")
           ("m" "New music" entry
            (file+headline ,(org-path "listen.org") "Music")
            "* %?\n:LOGBOOK:\n- Added at %U\n:END:")
