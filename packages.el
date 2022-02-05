@@ -70,3 +70,4 @@
 (package! citeproc-org)
 (package! elfeed)
 (package! org-alert)
+(package! atom-dark-theme)
