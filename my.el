@@ -109,6 +109,15 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
                    (lambda (filename)
                      (when (string-match-p ".org$" filename) t)))))
 
+(defun my-org-agenda-search-quotes ()
+  "Search for the text string in files containing quotes."
+  (interactive)
+  (let ((org-agenda-files
+         (append (list (expand-file-name "quotes.org" org-directory))
+                 (directory-files (expand-file-name "books" org-directory)
+                                  'full "\.*.org"))))
+    (org-search-view nil (read-string "Enter keyword: " nil nil "."))))
+
 (map! :leader "n f" #'my-find-org-note)
 
 ;; Utility functions for text manipulation
