@@ -302,15 +302,12 @@
 
 ;; org faces
 (custom-set-faces!
- '(org-quote :font "Literata" :height 110 :weight semibold :slant italic)
- '(org-document-title :font "Literata" :height 170 :slant italic :weight semibold)
- '(outline-1 :font "Helvetica" :height 110 :weight bold)
- '(org-todo :height 110)
- '(org-done :height 110)
- '(org-tag :height 110)
- '(outline-2 :font "Helvetica" :height 110 :weight semibold)
- '(outline-3 :font "Helvetica" :height 110 :weight semibold)
- '(outline-4 :font "Helvetica" :height 110 :weight semibold))
+ '(org-quote :font "Literata" :weight semibold :slant italic)
+ '(org-document-title :font "Literata" :slant italic :weight semibold)
+ '(outline-1 :font "Helvetica" :weight bold)
+ '(outline-2 :font "Helvetica" :weight semibold)
+ '(outline-3 :font "Helvetica" :weight semibold)
+ '(outline-4 :font "Helvetica" :weight semibold))
 (doom-themes-set-faces nil
   '(term :size 15))
 
