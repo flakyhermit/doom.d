@@ -58,6 +58,7 @@
 (map! :leader "P" #'projectile-find-file)
 (map! "<f9>" #'+term/toggle)
 (map! :leader "SPC" #'projectile-find-file)
+(map! :leader "t a" #'auto-save-mode)
 (map! :leader "a" #'evil-switch-to-windows-last-buffer)
 (map! :leader "l" #'projectile-find-file)
 (map! :leader "f x" #'crux-open-with)
@@ -536,36 +537,34 @@
         ("https://www.thehindu.com/opinion/feeder/default.rss" news india)
         ("https://aeon.co/feed.rss" longform)
         ("https://www.theatlantic.com/feed/all/" opinion longform)
-        "https://www.bloomberg.com/opinion/authors/AS6n2t3d_iA/tyler-cowen.rss"
-        "https://bestofecontwitter.substack.com/feed"
+         "https://www.bloomberg.com/opinion/authors/AS6n2t3d_iA/tyler-cowen.rss"
+         "https://bestofecontwitter.substack.com/feed"
         ("https://bestoftwitter.substack.com/feed/" twitter)
         ("https://broadstreet.blog/feed/" blog econ longform)
         ("https://fs.blog/feed/" blog)
         ("https://truthonthemarket.com/feed/" blog econ)
         ("http://www.econlib.org/index.xml" blog econ)
-        "https://www.jeweljames.com/index.xml"
-        ("https://feeds.feedburner.com/marginalrevolution/feed" blog econ)
-        ("https://www.overcomingbias.com/feed" blog econ rationality)
-        "https://blog.theleapjournal.org/feeds/posts/default"
-        ("https://agentyduck.blogspot.com/feeds/posts/default?alt=rss" blog rationality)
-        ("https://publicpolicy.substack.com/feed" blog econ india)
-        ("https://astralcodexten.substack.com/feed" blog rationality favorite)
-        "https://www.lesswrong.com/feed.xml?view=curated-rss"
-        "http://www.aaronsw.com/2002/feeds/pgessays.rss"
-        "http://feeds.feedburner.com/reflectd"
-        ("https://bestofecontwitter.substack.com/feed/" twitter)
-        ("https://krys.substack.com/feed" personal)
-        ("https://edwardsnowden.substack.com/feed/" blog newsletter privacy)
-        ("https://xkcd.com/atom.xml" comic)
-        ("https://news.ycombinator.com/rss" news tech)
-        ("https://longreads.com/feed/" longform)
-        ("https://www.wired.com/feed/rss" news tech)))
+         "https://www.jeweljames.com/index.xml"
+         ("https://feeds.feedburner.com/marginalrevolution/feed" blog econ)
+         ("https://www.overcomingbias.com/feed" blog econ rationality)
+         "https://blog.theleapjournal.org/feeds/posts/default"
+         ("https://agentyduck.blogspot.com/feeds/posts/default?alt=rss" blog rationality)
+         ("https://publicpolicy.substack.com/feed" blog econ india)
+         ("https://astralcodexten.substack.com/feed" blog rationality favorite)
+         ("https://www.lesswrong.com/feed.xml?view=curated-rss"
+         "http://www.aaronsw.com/2002/feeds/pgessays.rss"
+         "http://feeds.feedburner.com/reflectd"
+         ("https://bestofecontwitter.substack.com/feed/" twitter)
+         ("https://krys.substack.com/feed" personal)
+         ("https://edwardsnowden.substack.com/feed/" blog newsletter privacy)
+         ("https://xkcd.com/atom.xml" comic)
+         ("https://news.ycombinator.com/rss" news tech)
+         ("https://longreads.com/feed/" longform)
+         ("https://www.wired.com/feed/rss" news tech)))
 (setq-default elfeed-search-filter "@1-week-ago +unread ")
-(after! elfeed
-  (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
-  (add-hook 'elfeed-new-entry-hook
-            (elfeed-make-tagger :feed-url "youtube\\.com"
-                                :add '(video youtube))))
+(add-hook 'elfeed-new-entry-hook
+          (elfeed-make-tagger :feed-url "youtube\\.com"
+                              :add '(video youtube)))
 
 
 ;; Custom loads
