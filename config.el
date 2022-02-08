@@ -190,6 +190,8 @@
 (setq org-directory (getenv "ORG"))
 (defmacro org-path (filename)
     (expand-file-name filename org-directory))
+(defun org-path-fun (filename)
+    (expand-file-name filename org-directory))
 (setq org-ellipsis " › ")
 (setq org-global-refile-targets `((,(org-path "emacs.org") :maxlevel . 1)
                                   (,(org-path "gtd.org"):maxlevel . 2)))
@@ -203,7 +205,7 @@
 ;;       (delete-frame))))
 
 (after! org
-  (setq org-agenda-files `(,(org-path "gtd.org") ,(org-path "work.org"))
+  (setq org-agenda-files (mapcar #'org-path-fun '("gtd.org" "projects.org" "work.org" "clippings.org"))
         org-agenda-span 'week
         org-agenda-custom-commands `(("r" "Add to ROAM" tags-tree "roam")
                                      ("A" "Add to anki" tags-tree "anki")
