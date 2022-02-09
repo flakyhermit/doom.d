@@ -105,7 +105,7 @@ Prefix argument NOGIT prevents a git repository being initialized in the project
   "Find a note in the org directory root."
   (interactive)
   (find-file
-   (read-file-name "Org file: " org-directory "gtd.org" t nil
+   (read-file-name "Org file: " org-directory "planner.org" t nil
                    (lambda (filename)
                      (when (string-match-p ".org$" filename) t)))))
 

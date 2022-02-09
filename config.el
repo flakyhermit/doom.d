@@ -194,7 +194,7 @@
     (expand-file-name filename org-directory))
 (setq org-ellipsis " › ")
 (setq org-global-refile-targets `((,(org-path "emacs.org") :maxlevel . 1)
-                                  (,(org-path "gtd.org"):maxlevel . 2)))
+                                  (,(org-path "planner.org") :maxlevel . 2)))
 
 ;; (add-hook 'org-capture-mode-hook (lambda ()
 ;;                                    (if (equal "emacs-capture" (frame-parameter nil 'name))
@@ -205,7 +205,7 @@
 ;;       (delete-frame))))
 
 (after! org
-  (setq org-agenda-files (mapcar #'org-path-fun '("gtd.org" "projects.org" "work.org" "clippings.org"))
+  (setq org-agenda-files (mapcar #'org-path-fun '("planner.org" "projects.org" "work.org" "clippings.org"))
         org-agenda-span 'week
         org-agenda-custom-commands `(("r" "Add to ROAM" tags-tree "roam")
                                      ("A" "Add to anki" tags-tree "anki")
@@ -231,7 +231,7 @@
         org-id-method 'ts
         org-capture-templates
         `(("t" "Add a random capture to GTD" entry
-           (file+olp ,(org-path "gtd.org") "Inbox")
+           (file+olp ,(org-path "planner.org") "Inbox")
            "* %?\n")
           ("W" "Web capture" entry  (file ,(org-path "clippings.org"))
            "* %^{Title}\nSource: %:annotation \nCaptured: %U\n#+begin_quote\n%i\n#+end_quote\n%?"
