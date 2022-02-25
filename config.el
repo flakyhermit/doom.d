@@ -561,10 +561,17 @@
          ("https://longreads.com/feed/" longform)
          ("https://www.wired.com/feed/rss" news tech)))
 (setq-default elfeed-search-filter "@1-week-ago +unread ")
-(add-hook 'elfeed-new-entry-hook
-          (elfeed-make-tagger :feed-url "youtube\\.com"
-                              :add '(video youtube)))
-
+(after! elfeed
+  (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+  (add-hook 'elfeed-new-entry-hook
+            (elfeed-make-tagger :feed-url "youtube\\.com"
+                                :add '(video youtube))))
+(defun elfeed-set-prose-mode ()
+  (let ((buffername (buffer-name)))
+    (when buffername
+      (if (string= buffername "*elfeed-entry*")
+          (prose-mode)))))
+(add-hook 'elfeed-show-mode-hook #'elfeed-set-prose-mode)
 
 ;; Custom loads
 (load! "my.el")
