@@ -336,6 +336,12 @@
     '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
 
 (setq org-noter-notes-window-location 'other-frame)
+(map! :map org-mode-map :localleader
+      :desc "Launch org-noter session"
+      "N" #'org-noter)
+(map! :map org-noter-docs-mode-map :leader
+      :desc "Kill session" "q s"
+      #'org-noter-kill-session)
 
 (setq org-latex-default-packages-alist
       '(("" "graphicx" t)
