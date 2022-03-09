@@ -68,6 +68,6 @@
 (package! ox-hugo)
 (package! org-appear)
 (package! citeproc-org)
-(package! elfeed)
 (package! org-alert)
 (package! atom-dark-theme)
+(package! atom-one-dark-theme)
