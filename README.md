@@ -16,5 +16,4 @@
 - `fd` for faster searches.
 
 ### Misc
-- Iosevka SS04
-
+- Iosevka SS07

@@ -20,12 +20,12 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "Iosevka SS07" :size 21 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Iosevka Aile"))
+      doom-variable-pitch-font (font-spec :family "Helvetica"))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'atom-dark)
+(setq doom-theme 'doom-material)
 
 (setq doom-modeline-icon nil)
 (custom-set-faces!
@@ -205,12 +205,14 @@
 ;;       (delete-frame))))
 
 (after! org
-  (setq org-agenda-files (mapcar #'org-path-fun '("planner.org" "projects.org" "work.org" "clippings.org"))
+  (setq org-agenda-files (mapcar #'org-path-fun '("orgzly/Planner.org" "planner.org" "projects.org" "work.org" "clippings.org"))
         org-agenda-span 'week
         org-agenda-custom-commands `(("r" "Add to ROAM" tags-tree "roam")
                                      ("A" "Add to anki" tags-tree "anki")
                                      ;; Sparse trees
                                      ("d" . "Closed:")
+                                     ("c" "Captured today" occur-tree
+                                      ,(format "Captured on: \[%s \a\a\a \d\d:\d\d\]" (format-time-string "%F")))
                                      ("dy" "This year" tags-tree
                                       ,(format "TODO=\"READ\"+CLOSED>=\"<%s-01-01>\"" (format-time-string "%Y")))
                                      ("dl" "Last year" tags-tree
@@ -231,8 +233,15 @@
         org-id-method 'ts
         org-capture-templates
         `(("t" "Add a random capture to GTD" entry
-           (file+olp ,(org-path "planner.org") "Inbox")
-           "* %?\n")
+           (file+olp ,(org-path "orgzly/Planner.org") "Tasks")
+           "* TODO %?\n")
+          ("n" "Notes")
+          ("nr" "A fleeting note" entry
+           (file ,(org-path "fleeting-notes.org"))
+           "* %?\nCaptured On: %U")
+          ("np" "A personal note" entry
+           (file ,(org-path "personal.org"))
+           "* %?\nCaptured On: %U")
           ("W" "Web capture" entry  (file ,(org-path "clippings.org"))
            "* %^{Title}\nSource: %:annotation \nCaptured: %U\n#+begin_quote\n%i\n#+end_quote\n%?"
            :prepend t :empty-lines-before 1)
@@ -305,8 +314,8 @@
 ;; org faces
 (custom-set-faces!
  '(org-quote :font "Literata" :weight semibold :slant italic)
- '(org-document-title :font "Literata" :slant italic :weight semibold)
- '(outline-1 :font "Helvetica" :weight bold)
+ '(org-document-title :font "Literata" :height 170 :slant italic :weight semibold)
+ '(outline-1 :font "Helvetica" :weight semibold)
  '(outline-2 :font "Helvetica" :weight semibold)
  '(outline-3 :font "Helvetica" :weight semibold)
  '(outline-4 :font "Helvetica" :weight semibold))
@@ -459,6 +468,9 @@
 (custom-set-faces!
  '(markdown-blockquote-face :font "Literata" :slant italic))
 
+;; pdf-view
+(setq pdf-view-display-size 'fit-width)
+
 ;; mixed-pitch-mode ------------
 (after! mixed-pitch
   (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-todo)
@@ -504,7 +516,7 @@
 (after! org
   (require 'ox-hugo)
   (setq org-hugo-base-dir "~/Dropbox/Projects/jeweljames"
-        org-hugo-default-section-directory "brain")
+        org-hugo-section "brain")
   (citeproc-org-setup))
 
 ;; helm-bibtex ----------------
@@ -535,6 +547,33 @@
 ;; multi-term
 (setq multi-term-dedicated-window-height 12)
 
+;; web-mode ---------------------
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+(add-hook 'web-mode-hook 'prettier-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
+(eval-after-load 'autoinsert
+  '(define-auto-insert '("\\.jsx?\\'" . "js/jsx skeleton")
+     '("Short description: "
+       "/* Component -- "
+       (file-name-sans-extension
+        (file-name-nondirectory (buffer-file-name))) \n
+       "* Written on " (format-time-string "%A, %e %B %Y.") " */" \n \n
+       "function "
+       (file-name-sans-extension
+        (file-name-nondirectory (buffer-file-name)))
+       "() {" \n \n
+       "return (" \n
+       "<div className=\""
+       (file-name-sans-extension
+        (file-name-nondirectory (buffer-file-name))) "\">" \n
+        "</div>" \n
+       ")" \n
+       "}" > \n \n
+       "export default "
+       (file-name-sans-extension
+        (file-name-nondirectory (buffer-file-name))) \n
+       )))
 ;; elfeed -----------------------
 (setq elfeed-feeds
       '(("https://pipedapi.kavin.rocks/feed/rss?authToken=dc718b98-2606-4bb4-9221-73d727e10a7d" video youtube)
@@ -542,30 +581,30 @@
         ("https://www.thehindu.com/opinion/feeder/default.rss" news india)
         ("https://aeon.co/feed.rss" longform)
         ("https://www.theatlantic.com/feed/all/" opinion longform)
-         "https://www.bloomberg.com/opinion/authors/AS6n2t3d_iA/tyler-cowen.rss"
-         "https://bestofecontwitter.substack.com/feed"
+        "https://www.bloomberg.com/opinion/authors/AS6n2t3d_iA/tyler-cowen.rss"
+        "https://bestofecontwitter.substack.com/feed"
         ("https://bestoftwitter.substack.com/feed/" twitter)
         ("https://broadstreet.blog/feed/" blog econ longform)
         ("https://fs.blog/feed/" blog)
         ("https://truthonthemarket.com/feed/" blog econ)
         ("http://www.econlib.org/index.xml" blog econ)
-         "https://www.jeweljames.com/index.xml"
-         ("https://feeds.feedburner.com/marginalrevolution/feed" blog econ)
-         ("https://www.overcomingbias.com/feed" blog econ rationality)
-         "https://blog.theleapjournal.org/feeds/posts/default"
-         ("https://agentyduck.blogspot.com/feeds/posts/default?alt=rss" blog rationality)
-         ("https://publicpolicy.substack.com/feed" blog econ india)
-         ("https://astralcodexten.substack.com/feed" blog rationality favorite)
-         ("https://www.lesswrong.com/feed.xml?view=curated-rss"
-         "http://www.aaronsw.com/2002/feeds/pgessays.rss"
-         "http://feeds.feedburner.com/reflectd"
-         ("https://bestofecontwitter.substack.com/feed/" twitter)
-         ("https://krys.substack.com/feed" personal)
-         ("https://edwardsnowden.substack.com/feed/" blog newsletter privacy)
-         ("https://xkcd.com/atom.xml" comic)
-         ("https://news.ycombinator.com/rss" news tech)
-         ("https://longreads.com/feed/" longform)
-         ("https://www.wired.com/feed/rss" news tech)))
+        "https://www.jeweljames.com/index.xml"
+        ("https://feeds.feedburner.com/marginalrevolution/feed" blog econ)
+        ("https://www.overcomingbias.com/feed" blog econ rationality)
+        "https://blog.theleapjournal.org/feeds/posts/default"
+        ("https://agentyduck.blogspot.com/feeds/posts/default?alt=rss" blog rationality)
+        ("https://publicpolicy.substack.com/feed" blog econ india)
+        ("https://astralcodexten.substack.com/feed" blog rationality favorite)
+        "https://www.lesswrong.com/feed.xml?view=curated-rss"
+        "http://www.aaronsw.com/2002/feeds/pgessays.rss"
+        "http://feeds.feedburner.com/reflectd"
+        ("https://bestofecontwitter.substack.com/feed/" twitter)
+        ("https://krys.substack.com/feed" personal)
+        ("https://edwardsnowden.substack.com/feed/" blog newsletter privacy)
+        ("https://xkcd.com/atom.xml" comic)
+        ("https://news.ycombinator.com/rss" news tech)
+        ("https://longreads.com/feed/" longform)
+        ("https://www.wired.com/feed/rss" news tech)))
 (setq-default elfeed-search-filter "@1-week-ago +unread ")
 (after! elfeed
   (add-hook! 'elfeed-search-mode-hook 'elfeed-update)

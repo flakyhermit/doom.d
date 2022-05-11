@@ -71,3 +71,4 @@
 (package! org-alert)
 (package! atom-dark-theme)
 (package! atom-one-dark-theme)
+(package! prettier-js)
